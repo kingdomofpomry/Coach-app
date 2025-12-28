@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Life Coach</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+  <h1>Din AI-Coach</h1>
+
+  <p id="disclaimer">
+    Denna AI ger stöd, reflektion och vägledning.  
+    Den ersätter inte professionell rådgivning.  
+    Använd alltid sunt förnuft.
+  </p>
+
+  <textarea id="input" placeholder="Vad vill du ha hjälp med just nu?"></textarea>
+  <button onclick="send()">Få vägledning</button>
+
+  <div id="response"></div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+  }
+</script>
+</body>
+</html>

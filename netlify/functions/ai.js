@@ -1,32 +1,34 @@
 export async function handler(event) {
+  if (event.httpMethod !== "POST") {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: "Method not allowed" }),
+    };
+  }
+
   try {
     const { message } = JSON.parse(event.body);
 
-    const response = await fetch("https://api.openai.com/v1/responses", {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
-        input: [
+        messages: [
           {
             role: "system",
-            content: `
-Du är en trygg, lugn och medmänsklig AI-coach.
-Du ger aldrig farliga råd.
-Du uppmuntrar sunt förnuft, eftertanke, vänlighet,
-lugnt föräldraskap och respekt i relationer.
-Ingen medicinsk, juridisk eller professionell rådgivning.
-`
+            content:
+              "Du är en trygg, lugn och medmänsklig AI-coach. Du ger aldrig farliga råd.",
           },
           {
             role: "user",
-            content: message
-          }
-        ]
-      })
+            content: message,
+          },
+        ],
+      }),
     });
 
     const data = await response.json();
@@ -34,14 +36,13 @@ Ingen medicinsk, juridisk eller professionell rådgivning.
     return {
       statusCode: 200,
       body: JSON.stringify({
-        reply: data.output_text
-      })
+        reply: data.choices[0].message.content,
+      }),
     };
-
-  } catch (err) {
+  } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: err.message })
+      body: JSON.stringify({ error: "AI error" }),
     };
   }
 }

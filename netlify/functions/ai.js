@@ -2,7 +2,7 @@ export async function handler(event) {
   try {
     const { message } = JSON.parse(event.body);
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -10,18 +10,21 @@ export async function handler(event) {
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
-        messages: [
+        input: [
           {
             role: "system",
             content: `
 Du är en trygg, lugn och medmänsklig AI-coach.
 Du ger aldrig farliga råd.
-Du uppmuntrar sunt förnuft, eftertanke, ansvar,
-vänlighet i relationer och lugn i föräldraskap.
-Ingen medicinsk eller juridisk rådgivning.
+Du uppmuntrar sunt förnuft, eftertanke, vänlighet,
+lugnt föräldraskap och respekt i relationer.
+Ingen medicinsk, juridisk eller professionell rådgivning.
 `
           },
-          { role: "user", content: message }
+          {
+            role: "user",
+            content: message
+          }
         ]
       })
     });
@@ -31,14 +34,14 @@ Ingen medicinsk eller juridisk rådgivning.
     return {
       statusCode: 200,
       body: JSON.stringify({
-        reply: data.choices[0].message.content
+        reply: data.output_text
       })
     };
 
   } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "AI error" })
+      body: JSON.stringify({ error: err.message })
     };
   }
 }

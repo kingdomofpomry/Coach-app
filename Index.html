@@ -3,35 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Life Coach</title>
+
+  <title>Key of Life – AI Coach</title>
+
+  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
+
+  <!-- Ikoner (för Safari + web) -->
+  <link rel="icon" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-512.png">
+
   <link rel="stylesheet" href="style.css">
-<link rel="apple-touch-icon" href="icon-512.png">
-<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 </head>
+
 <body>
+  <div id="app">
 
-<div id="app">
-  <img src="logo.png" alt="AI Coach logotyp" class="logo">
-  <h1>Din AI-Coach</h1>
+    <img src="icon-512.png" alt="Key of Life logotyp" class="logo">
 
-  <p id="disclaimer">
-    Denna AI ger stöd, reflektion och vägledning.  
-    Den ersätter inte professionell rådgivning.  
-    Använd alltid sunt förnuft.
-  </p>
+    <h1>Din AI-Coach</h1>
 
-  <textarea id="input" placeholder="Vad vill du ha hjälp med just nu?"></textarea>
-  <button onclick="send()">Få vägledning</button>
+    <p id="disclaimer">
+      Denna AI ger stöd, reflektion och vägledning.
+      Den ersätter inte professionell rådgivning.
+      Använd alltid sunt förnuft.
+    </p>
 
-  <div id="response"></div>
-</div>
+    <textarea
+      id="input"
+      placeholder="Vad vill du ha hjälp med just nu?"
+    ></textarea>
 
-<script src="app.js"></script>
-<script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js");
-  }
-</script>
+    <button onclick="send()">Få vägledning</button>
+
+    <div id="response"></div>
+
+  </div>
+
+  <script src="app.js"></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js");
+    }
+  </script>
 </body>
 </html>

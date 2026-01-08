@@ -9,26 +9,26 @@ html, body {
   height: 100%;
   background: linear-gradient(180deg, #0b1020, #121a33);
   color: white;
+  overflow-x: hidden;
 }
 
 #app {
-  min-height: 100vh;
-  padding: 24px;
   max-width: 480px;
-  margin: auto;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* 🔴 KRITISKT – detta gör sidan klickbar */
-#app * {
-  pointer-events: auto;
-}
-
-.header {
+/* 🔒 LÅSER HEADERN */
+header {
   text-align: center;
 }
 
-.header img {
-  width: 140px;
+/* 🔥 DETTA ÄR VIKTIGAST */
+header img {
+  width: 100%;
+  max-width: 220px;
+  max-height: 220px;
+  height: auto;
   display: block;
   margin: 0 auto 16px;
 }
@@ -54,6 +54,7 @@ button {
   border-radius: 14px;
   font-size: 16px;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 button:active {

@@ -2,18 +2,19 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Din Coach</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <main id="app">
+  <div id="app">
 
-    <img src="icon-512.png" class="logo" />
-
-    <h1>Din Coach</h1>
-    <p>Välj område och få vägledning.</p>
+    <div class="header">
+      <img src="icon-512.png" alt="Key of Life" />
+      <h1>Din Coach</h1>
+      <p>Välj område och få vägledning.</p>
+    </div>
 
     <div class="lang">
       <button onclick="setLanguage('sv')">🇸🇪 Svenska</button>
@@ -29,13 +30,13 @@
       <button onclick="selectCategory('personlig')">🚀 Personlig utveckling</button>
     </div>
 
-    <section id="result" hidden>
-      <h2 id="title"></h2>
-      <p id="text"></p>
-      <button onclick="reset()">⬅ Tillbaka</button>
-    </section>
+    <div id="result" class="result hidden">
+      <h2 id="resultTitle"></h2>
+      <p id="resultText"></p>
+      <button onclick="goBack()">⬅ Tillbaka</button>
+    </div>
 
-  </main>
+  </div>
 
   <script src="app.js"></script>
 </body>

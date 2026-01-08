@@ -1,33 +1,40 @@
-let currentLanguage = "sv";
+let language = "sv";
+let area = "";
+let focus = "";
 
 const texts = {
   sv: {
-    title: "Din Coach",
-    subtitle: "Välj område och få vägledning. Detta ersätter inte professionell rådgivning.",
-    economy:
-      "Ekonomi handlar inte bara om pengar, utan om trygghet och valfrihet. Vill du börja med budget, mål eller relation till pengar?",
-    development:
-      "Personlig utveckling börjar med självinsikt. Vad vill du stärka just nu – disciplin, självkänsla eller riktning?"
+    stress: "Stress uppstår ofta när vi tar ansvar för mer än vi har utrymme för. Vad pressar dig mest just nu?",
+    relation: "Relationer speglar ofta våra inre behov. Känns det som längtan, frustration eller osäkerhet?",
+    energy: "Låg energi kan vara ett tecken på att något viktigt saknas. Vila, glädje eller tydliga gränser?",
+    confidence: "Självkänsla byggs genom hur vi talar till oss själva. Vad säger din inre röst oftast?"
   },
   en: {
-    title: "Your Coach",
-    subtitle: "Choose an area for guidance. This does not replace professional advice.",
-    economy:
-      "Economy is not only about money, but about security and freedom of choice. Do you want to start with budgeting, goals, or mindset?",
-    development:
-      "Personal development starts with awareness. What do you want to strengthen right now – discipline, confidence, or direction?"
+    stress: "Stress often appears when we carry too much. What feels heaviest right now?",
+    relation: "Relationships often reflect inner needs. Is it longing, frustration, or uncertainty?",
+    energy: "Low energy may signal unmet needs. Rest, joy, or boundaries?",
+    confidence: "Confidence grows from self-talk. What does your inner voice say?"
   }
 };
 
 function setLanguage(lang) {
-  currentLanguage = lang;
-  document.getElementById("title").innerText = texts[lang].title;
-  document.getElementById("subtitle").innerText = texts[lang].subtitle;
-  document.getElementById("response").style.display = "none";
+  language = lang;
 }
 
-function selectCategory(category) {
-  const box = document.getElementById("response");
-  box.innerText = texts[currentLanguage][category];
-  box.style.display = "block";
+function chooseArea(selected) {
+  area = selected;
+  document.getElementById("step1").classList.add("hidden");
+  document.getElementById("step2").classList.remove("hidden");
+}
+
+function chooseFocus(selected) {
+  focus = selected;
+  document.getElementById("step2").classList.add("hidden");
+  document.getElementById("step3").classList.remove("hidden");
+}
+
+function getGuidance() {
+  const response = document.getElementById("response");
+  response.innerText = texts[language][focus];
+  response.classList.remove("hidden");
 }

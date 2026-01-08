@@ -1,79 +1,73 @@
+* {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: system-ui;
-  background: linear-gradient(180deg, #0c1326, #0a0f1f);
+  background: linear-gradient(180deg, #0b1020, #121a33);
   color: white;
 }
 
-.container {
-  max-width: 420px;
+#app {
+  padding: 24px;
+  max-width: 500px;
   margin: auto;
-  padding: 20px;
-  text-align: center;
 }
 
 .logo {
   width: 140px;
-  margin: 20px auto;
+  display: block;
+  margin: 0 auto 20px;
 }
 
-.subtitle {
-  opacity: 0.85;
+h1, h2 {
+  text-align: center;
 }
 
-.language button {
-  margin: 6px;
-  padding: 8px 16px;
-  border-radius: 20px;
-  border: none;
-  background: #1f2a4d;
-  color: white;
+p {
+  text-align: center;
+  opacity: 0.9;
 }
 
-.buttons {
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+}
+
+.language {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
-  margin-top: 24px;
-}
-
-.card {
-  padding: 18px;
-  border-radius: 16px;
-  background: #1a2545;
-  border: none;
-  color: white;
-  font-size: 16px;
-}
-
-textarea {
-  width: 100%;
-  min-height: 80px;
-  border-radius: 14px;
-  border: none;
-  padding: 12px;
   margin-top: 20px;
-  font-size: 14px;
 }
 
-.main-btn {
-  margin-top: 14px;
-  width: 100%;
-  padding: 14px;
-  border-radius: 16px;
-  border: none;
-  background: #2f6bff;
+button {
+  background: #1c274a;
   color: white;
-  font-size: 16px;
-}
-
-.response {
-  background: #1f3cff;
-  border-radius: 16px;
+  border: none;
   padding: 16px;
-  margin-top: 20px;
+  border-radius: 14px;
+  font-size: 16px;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 10;
 }
 
-.hidden {
-  display: none;
+button:active {
+  transform: scale(0.98);
+}
+
+button:hover {
+  background: #243063;
 }

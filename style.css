@@ -1,97 +1,58 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #0b132b;
-  color: #ffffff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  background: linear-gradient(180deg, #0c1326, #0a0f1f);
+  color: white;
 }
 
-.app {
-  max-width: 500px;
-  margin: 0 auto;
+.container {
+  max-width: 420px;
+  margin: auto;
   padding: 20px;
+  text-align: center;
 }
 
 .logo {
-  display: block;
-  margin: 30px auto 10px;
   width: 140px;
+  margin: 20px auto;
+  display: block;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 10px;
+.language button {
+  margin: 5px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  background: #1f2a4d;
+  color: white;
+  cursor: pointer;
 }
 
-.subtitle {
-  text-align: center;
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-/* 🔹 SNABBKNAPPAR – FIX */
-.quick-buttons {
+.buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin: 25px 0;
-  position: relative;
-  z-index: 10; /* 🔑 VIKTIG */
 }
 
-.quick-buttons button {
-  padding: 14px;
-  border-radius: 12px;
+.card {
+  padding: 16px;
+  border-radius: 14px;
+  background: #1a2545;
   border: none;
-  background: #1c2541;
-  color: #ffffff;
-  font-size: 15px;
+  color: white;
+  font-size: 16px;
   cursor: pointer;
 }
 
-/* Chat får INTE blockera */
-.chat {
-  margin-top: 10px;
-  min-height: 200px;
-  position: relative;
-  z-index: 1;
+.card:hover {
+  background: #243366;
 }
 
-.message {
-  margin-bottom: 14px;
-  padding: 12px;
-  border-radius: 10px;
-  line-height: 1.5;
-}
-
-.user {
-  background: #1c2541;
-  text-align: right;
-}
-
-.ai {
-  background: #3a86ff;
-}
-
-.thinking {
-  opacity: 0.6;
-  font-style: italic;
-}
-
-.input-area {
+.response {
+  background: #1f3cff;
+  border-radius: 14px;
+  padding: 16px;
   margin-top: 20px;
-  display: flex;
-  gap: 10px;
-  position: relative;
-  z-index: 5;
-}
-
-input {
-  flex: 1;
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-}
-
-button {
-  font-weight: bold;
+  display: none;
 }

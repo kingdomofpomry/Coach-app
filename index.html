@@ -2,40 +2,34 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <title>Din AI-Coach</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Key of Life – Coach</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="app">
-    <img src="icon-512.png" alt="Key of Life" class="logo" />
+  <div class="container">
+    <img src="icon-512.png" class="logo" alt="Key of Life">
 
-    <h1>Din AI-Coach</h1>
-    <p class="subtitle">
-      Denna AI ger stöd, reflektion och vägledning.  
-      Den ersätter inte professionell rådgivning.  
-      Använd alltid sunt förnuft.
+    <h1 id="title">Din Coach</h1>
+    <p id="subtitle">
+      Välj område och få vägledning. Detta ersätter inte professionell rådgivning.
     </p>
 
-    <!-- 🔹 SNABBKNAPPAR -->
-    <div class="quick-buttons">
-      <button onclick="quickStart('stress')">😮‍💨 Stress</button>
-      <button onclick="quickStart('relation')">❤️ Relation</button>
-      <button onclick="quickStart('energi')">⚡ Energi</button>
-      <button onclick="quickStart('självkänsla')">🌱 Självkänsla</button>
+    <!-- Språkval -->
+    <div class="language">
+      <button onclick="setLanguage('sv')">🇸🇪 Svenska</button>
+      <button onclick="setLanguage('en')">🇬🇧 English</button>
     </div>
 
-    <div id="chat" class="chat"></div>
-
-    <div class="input-area">
-      <input
-        id="input"
-        type="text"
-        placeholder="Vad vill du ha hjälp med just nu?"
-      />
-      <button onclick="sendMessage()">Få vägledning</button>
+    <!-- Kategorier -->
+    <div class="buttons">
+      <button onclick="selectCategory('economy')" class="card">💰 Ekonomi</button>
+      <button onclick="selectCategory('development')" class="card">🚀 Personlig utveckling</button>
     </div>
+
+    <!-- Resultat -->
+    <div id="response" class="response"></div>
   </div>
 
   <script src="app.js"></script>

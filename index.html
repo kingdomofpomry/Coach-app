@@ -2,40 +2,32 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
+  <title>Din AI-Coach</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Key of Life – AI Coach</title>
-
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icon-512.png">
-  <link rel="apple-touch-icon" href="icon-512.png">
-
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <div id="app">
 
-    <img src="icon-512.png" alt="Key of Life logotyp" class="logo">
+  <div class="app">
+    <img src="icon-512.png" alt="Key of Life" class="logo" />
 
-    <h1>Key of Life</h1>
-    <p class="subtitle">Din lugna digitala coach</p>
-
-    <p id="disclaimer">
-      Denna app ger reflektion och stöd.
-      Den ersätter inte professionell rådgivning.
-      Använd alltid ditt eget omdöme.
+    <h1>Din AI-Coach</h1>
+    <p class="subtitle">
+      Denna AI ger stöd, reflektion och vägledning.  
+      Den ersätter inte professionell rådgivning.  
+      Använd alltid sunt förnuft.
     </p>
 
-    <textarea
-      id="input"
-      placeholder="Vad vill du reflektera kring just nu?"
-    ></textarea>
+    <div id="chat" class="chat"></div>
 
-    <button onclick="send()">Få vägledning</button>
-
-    <div id="response"></div>
-
+    <div class="input-area">
+      <input
+        id="input"
+        type="text"
+        placeholder="Vad vill du ha hjälp med just nu?"
+      />
+      <button onclick="sendMessage()">Få vägledning</button>
+    </div>
   </div>
 
   <script src="app.js"></script>

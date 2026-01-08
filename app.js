@@ -1,92 +1,33 @@
-const chat = document.getElementById("chat");
-const input = document.getElementById("input");
+let currentLanguage = "sv";
 
-let conversationMemory = [];
-
-function addMessage(text, sender) {
-  const div = document.createElement("div");
-  div.className = `message ${sender}`;
-  div.innerText = text;
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
-}
-
-function quickStart(type) {
-  let intro = "";
-
-  switch (type) {
-    case "stress":
-      intro = "Jag känner mig stressad och överväldigad.";
-      break;
-    case "relation":
-      intro = "Jag har funderingar kring en relation i mitt liv.";
-      break;
-    case "energi":
-      intro = "Jag känner mig trött och saknar energi.";
-      break;
-    case "självkänsla":
-      intro = "Jag vill jobba med min självkänsla.";
-      break;
+const texts = {
+  sv: {
+    title: "Din Coach",
+    subtitle: "Välj område och få vägledning. Detta ersätter inte professionell rådgivning.",
+    economy:
+      "Ekonomi handlar inte bara om pengar, utan om trygghet och valfrihet. Vill du börja med budget, mål eller relation till pengar?",
+    development:
+      "Personlig utveckling börjar med självinsikt. Vad vill du stärka just nu – disciplin, självkänsla eller riktning?"
+  },
+  en: {
+    title: "Your Coach",
+    subtitle: "Choose an area for guidance. This does not replace professional advice.",
+    economy:
+      "Economy is not only about money, but about security and freedom of choice. Do you want to start with budgeting, goals, or mindset?",
+    development:
+      "Personal development starts with awareness. What do you want to strengthen right now – discipline, confidence, or direction?"
   }
+};
 
-  addMessage(intro, "user");
-  respond(intro);
+function setLanguage(lang) {
+  currentLanguage = lang;
+  document.getElementById("title").innerText = texts[lang].title;
+  document.getElementById("subtitle").innerText = texts[lang].subtitle;
+  document.getElementById("response").style.display = "none";
 }
 
-function analyzeEmotion(text) {
-  const t = text.toLowerCase();
-
-  if (t.includes("stress")) return "stress";
-  if (t.includes("trött") || t.includes("energi")) return "energi";
-  if (t.includes("relation")) return "relation";
-  if (t.includes("självkänsla")) return "självkänsla";
-
-  return "oklar";
-}
-
-function generateResponse(message) {
-  const emotion = analyzeEmotion(message);
-
-  switch (emotion) {
-    case "stress":
-      return "Tack för att du delar. Stress uppstår ofta när vi tar ansvar för mer än vi egentligen har utrymme för. Om du stannar upp ett ögonblick – vad är det som pressar dig mest just nu?";
-
-    case "relation":
-      return "Relationer kan väcka både längtan och frustration. Känns det som att du inte blir förstådd, eller handlar det mer om en inre konflikt hos dig själv?";
-
-    case "energi":
-      return "När energin är låg finns det ofta ett behov som inte blivit mött. Är det vila, glädje eller kanske gränser som saknas just nu?";
-
-    case "självkänsla":
-      return "Att vilja stärka sin självkänsla är ett modigt steg. När tvivlet kommer – vad brukar du säga till dig själv då?";
-
-    default:
-      return "Jag lyssnar. Vill du berätta lite mer om vad som pågår inom dig just nu?";
-  }
-}
-
-function respond(message) {
-  conversationMemory.push({ role: "user", content: message });
-
-  const thinking = document.createElement("div");
-  thinking.className = "message ai thinking";
-  thinking.innerText = "AI tänker…";
-  chat.appendChild(thinking);
-  chat.scrollTop = chat.scrollHeight;
-
-  setTimeout(() => {
-    thinking.remove();
-    const reply = generateResponse(message);
-    conversationMemory.push({ role: "ai", content: reply });
-    addMessage(reply, "ai");
-  }, 800);
-}
-
-function sendMessage() {
-  const text = input.value.trim();
-  if (!text) return;
-
-  addMessage(text, "user");
-  input.value = "";
-  respond(text);
+function selectCategory(category) {
+  const box = document.getElementById("response");
+  box.innerText = texts[currentLanguage][category];
+  box.style.display = "block";
 }

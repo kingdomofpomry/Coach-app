@@ -1,40 +1,49 @@
 let language = "sv";
-let area = "";
-let focus = "";
-
-const texts = {
-  sv: {
-    stress: "Stress uppstår ofta när vi tar ansvar för mer än vi har utrymme för. Vad pressar dig mest just nu?",
-    relation: "Relationer speglar ofta våra inre behov. Känns det som längtan, frustration eller osäkerhet?",
-    energy: "Låg energi kan vara ett tecken på att något viktigt saknas. Vila, glädje eller tydliga gränser?",
-    confidence: "Självkänsla byggs genom hur vi talar till oss själva. Vad säger din inre röst oftast?"
-  },
-  en: {
-    stress: "Stress often appears when we carry too much. What feels heaviest right now?",
-    relation: "Relationships often reflect inner needs. Is it longing, frustration, or uncertainty?",
-    energy: "Low energy may signal unmet needs. Rest, joy, or boundaries?",
-    confidence: "Confidence grows from self-talk. What does your inner voice say?"
-  }
-};
 
 function setLanguage(lang) {
   language = lang;
+  alert(lang === "sv" ? "Svenska valt" : "English selected");
 }
 
-function chooseArea(selected) {
-  area = selected;
-  document.getElementById("step1").classList.add("hidden");
-  document.getElementById("step2").classList.remove("hidden");
+function chooseCategory(category) {
+  document.getElementById("step-1").classList.remove("active");
+  document.getElementById("step-2").classList.add("active");
+
+  const title = document.getElementById("category-title");
+  const text = document.getElementById("coach-text");
+
+  const content = {
+    stress: {
+      sv: "Stress",
+      text: "Stress uppstår ofta när vi bär för mycket. Vad pressar dig mest just nu?"
+    },
+    relation: {
+      sv: "Relation",
+      text: "Relationer speglar ofta våra innersta behov. Vad känns oklart för dig?"
+    },
+    energi: {
+      sv: "Energi",
+      text: "Låg energi är en signal. Vad tror du saknas i din vardag?"
+    },
+    självkänsla: {
+      sv: "Självkänsla",
+      text: "Hur pratar du med dig själv när det är svårt?"
+    },
+    ekonomi: {
+      sv: "Ekonomi",
+      text: "Ekonomi handlar både om pengar och trygghet. Vad vill du förändra?"
+    },
+    personlig: {
+      sv: "Personlig utveckling",
+      text: "Utveckling börjar med medvetenhet. Vem vill du bli?"
+    }
+  };
+
+  title.innerText = content[category].sv;
+  text.innerText = content[category].text;
 }
 
-function chooseFocus(selected) {
-  focus = selected;
-  document.getElementById("step2").classList.add("hidden");
-  document.getElementById("step3").classList.remove("hidden");
-}
-
-function getGuidance() {
-  const response = document.getElementById("response");
-  response.innerText = texts[language][focus];
-  response.classList.remove("hidden");
+function goBack() {
+  document.getElementById("step-2").classList.remove("active");
+  document.getElementById("step-1").classList.add("active");
 }

@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  font-family: system-ui;
   background: linear-gradient(180deg, #0c1326, #0a0f1f);
   color: white;
 }
@@ -15,44 +15,65 @@ body {
 .logo {
   width: 140px;
   margin: 20px auto;
-  display: block;
+}
+
+.subtitle {
+  opacity: 0.85;
 }
 
 .language button {
-  margin: 5px;
-  padding: 8px 14px;
+  margin: 6px;
+  padding: 8px 16px;
   border-radius: 20px;
   border: none;
   background: #1f2a4d;
   color: white;
-  cursor: pointer;
 }
 
 .buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 25px 0;
+  gap: 14px;
+  margin-top: 24px;
 }
 
 .card {
-  padding: 16px;
-  border-radius: 14px;
+  padding: 18px;
+  border-radius: 16px;
   background: #1a2545;
   border: none;
   color: white;
   font-size: 16px;
-  cursor: pointer;
 }
 
-.card:hover {
-  background: #243366;
+textarea {
+  width: 100%;
+  min-height: 80px;
+  border-radius: 14px;
+  border: none;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.main-btn {
+  margin-top: 14px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  background: #2f6bff;
+  color: white;
+  font-size: 16px;
 }
 
 .response {
   background: #1f3cff;
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 16px;
   margin-top: 20px;
+}
+
+.hidden {
   display: none;
 }

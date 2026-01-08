@@ -1,34 +1,48 @@
-function send() {
-  const input = document.getElementById("input");
-  const responseDiv = document.getElementById("response");
+const chat = document.getElementById("chat");
+const input = document.getElementById("input");
 
-  if (!input.value.trim()) {
-    responseDiv.innerText = "Skriv något först 🌱";
-    return;
+function addMessage(text, sender) {
+  const div = document.createElement("div");
+  div.className = `message ${sender}`;
+  div.innerText = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function fakeAIResponse(message) {
+  const msg = message.toLowerCase();
+
+  if (msg.includes("stress")) {
+    return "Det låter som att du bär mycket just nu. Stress är ofta ett tecken på att något inom oss behöver uppmärksamhet, inte pressas bort. Vad i ditt liv känns mest överväldigande i detta ögonblick?";
   }
 
-  const text = input.value.toLowerCase();
-
-  let reply = "Jag hör dig.\n\nTa ett lugnt andetag.\n\n";
-
-  if (text.includes("stress") || text.includes("trött")) {
-    reply +=
-      "Stress är ofta ett tecken på att något behöver få lite mer utrymme eller vila.\n\n" +
-      "Vad känns mest pressande just nu?";
-  } else if (text.includes("relation") || text.includes("partner")) {
-    reply +=
-      "Relationer väcker mycket känslor, särskilt när man bryr sig.\n\n" +
-      "Vad är det du innerst inne önskar ska bli bättre?";
-  } else if (text.includes("barn") || text.includes("familj")) {
-    reply +=
-      "När det gäller barn och familj är lugn och närvaro viktigare än perfektion.\n\n" +
-      "Vad hade känts som ett snällt nästa steg?";
-  } else {
-    reply +=
-      "Det du delar är viktigt.\n\n" +
-      "Vill du utforska känslan bakom det du skrev, eller situationen runt omkring?";
+  if (msg.includes("trött")) {
+    return "Trötthet kan vara både fysisk och emotionell. Har du gett dig själv tillräckligt med återhämtning, eller har du burit mer ansvar än vad som är rimligt för dig?";
   }
 
-  responseDiv.innerText = reply;
+  if (msg.includes("relation")) {
+    return "Relationer speglar ofta våra innersta behov. Känns det som att du ger mer än du får, eller är det något osagt som ligger kvar mellan er?";
+  }
+
+  return "Tack för att du delar. Ta ett andetag och känn efter – vad är det viktigaste du behöver just nu för att må lite lättare i dig själv?";
+}
+
+function sendMessage() {
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMessage(text, "user");
   input.value = "";
+
+  const thinking = document.createElement("div");
+  thinking.className = "message ai thinking";
+  thinking.innerText = "AI tänker…";
+  chat.appendChild(thinking);
+  chat.scrollTop = chat.scrollHeight;
+
+  setTimeout(() => {
+    thinking.remove();
+    const reply = fakeAIResponse(text);
+    addMessage(reply, "ai");
+  }, 900);
 }

@@ -3,50 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Key of Life – Coach</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Din Coach</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="container">
+  <div id="app">
 
-  <img src="icon-512.png" class="logo" alt="Key of Life">
+    <!-- STEG 1 -->
+    <section id="step-1" class="step active">
+      <img src="icon-512.png" class="logo" />
+      <h1>Din Coach</h1>
+      <p>Välj område och få vägledning.</p>
 
-  <h1>Din Coach</h1>
-  <p class="subtitle">
-    Välj område och få vägledning. Detta ersätter inte professionell rådgivning.
-  </p>
+      <div class="language">
+        <button onclick="setLanguage('sv')">🇸🇪 Svenska</button>
+        <button onclick="setLanguage('en')">🇬🇧 English</button>
+      </div>
 
-  <!-- Språk -->
-  <div class="language">
-    <button onclick="setLanguage('sv')">🇸🇪 Svenska</button>
-    <button onclick="setLanguage('en')">🇬🇧 English</button>
+      <div class="grid">
+        <button onclick="chooseCategory('stress')">😮‍💨 Stress</button>
+        <button onclick="chooseCategory('relation')">❤️ Relation</button>
+        <button onclick="chooseCategory('energi')">⚡ Energi</button>
+        <button onclick="chooseCategory('självkänsla')">🌱 Självkänsla</button>
+        <button onclick="chooseCategory('ekonomi')">💰 Ekonomi</button>
+        <button onclick="chooseCategory('personlig')">🚀 Personlig utveckling</button>
+      </div>
+    </section>
+
+    <!-- STEG 2 -->
+    <section id="step-2" class="step">
+      <h2 id="category-title"></h2>
+      <p id="coach-text"></p>
+      <button onclick="goBack()">⬅ Tillbaka</button>
+    </section>
+
   </div>
 
-  <!-- STEG 1 -->
-  <div id="step1" class="buttons">
-    <button class="card" onclick="chooseArea('economy')">💰 Ekonomi</button>
-    <button class="card" onclick="chooseArea('development')">🚀 Personlig utveckling</button>
-  </div>
-
-  <!-- STEG 2 -->
-  <div id="step2" class="buttons hidden">
-    <button class="card" onclick="chooseFocus('stress')">😟 Stress</button>
-    <button class="card" onclick="chooseFocus('relation')">❤️ Relation</button>
-    <button class="card" onclick="chooseFocus('energy')">⚡ Energi</button>
-    <button class="card" onclick="chooseFocus('confidence')">🌱 Självkänsla</button>
-  </div>
-
-  <!-- STEG 3 -->
-  <div id="step3" class="hidden">
-    <textarea id="userInput" placeholder="Skriv kort hur du känner eller vad du vill jobba med..."></textarea>
-    <button class="main-btn" onclick="getGuidance()">Få vägledning</button>
-  </div>
-
-  <div id="response" class="response hidden"></div>
-
-</div>
-
-<script src="app.js"></script>
+  <!-- JS LADDAS SIST -->
+  <script src="./app.js"></script>
 </body>
 </html>

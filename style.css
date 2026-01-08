@@ -1,46 +1,49 @@
 * {
   box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
   background: linear-gradient(180deg, #0b1020, #121a33);
   color: white;
 }
 
 #app {
+  min-height: 100vh;
+  padding: 24px;
   max-width: 480px;
   margin: auto;
-  padding: 24px;
+}
+
+/* 🔴 KRITISKT – detta gör sidan klickbar */
+#app * {
+  pointer-events: auto;
+}
+
+.header {
   text-align: center;
 }
 
-.logo {
+.header img {
   width: 140px;
-  margin-bottom: 16px;
-}
-
-h1 {
-  margin-bottom: 8px;
-}
-
-p {
-  opacity: 0.9;
+  display: block;
+  margin: 0 auto 16px;
 }
 
 .lang {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin: 16px 0;
+  gap: 12px;
+  margin: 20px 0;
 }
 
 .buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
-  margin-top: 20px;
 }
 
 button {
@@ -54,9 +57,13 @@ button {
 }
 
 button:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
-#result {
+.result {
   margin-top: 24px;
+}
+
+.hidden {
+  display: none;
 }

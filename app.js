@@ -11,49 +11,62 @@ function addMessage(text, sender) {
   chat.scrollTop = chat.scrollHeight;
 }
 
+function quickStart(type) {
+  let intro = "";
+
+  switch (type) {
+    case "stress":
+      intro = "Jag känner mig stressad och överväldigad.";
+      break;
+    case "relation":
+      intro = "Jag har funderingar kring en relation i mitt liv.";
+      break;
+    case "energi":
+      intro = "Jag känner mig trött och saknar energi.";
+      break;
+    case "självkänsla":
+      intro = "Jag vill jobba med min självkänsla.";
+      break;
+  }
+
+  addMessage(intro, "user");
+  respond(intro);
+}
+
 function analyzeEmotion(text) {
   const t = text.toLowerCase();
 
-  if (t.includes("stress") || t.includes("press")) return "stress";
-  if (t.includes("trött") || t.includes("utmatt")) return "trötthet";
-  if (t.includes("ledsen") || t.includes("ensam")) return "sorg";
+  if (t.includes("stress")) return "stress";
+  if (t.includes("trött") || t.includes("energi")) return "energi";
   if (t.includes("relation")) return "relation";
-  if (t.includes("rädd") || t.includes("oro")) return "oro";
+  if (t.includes("självkänsla")) return "självkänsla";
 
   return "oklar";
 }
 
-function generatePersonalResponse(message) {
+function generateResponse(message) {
   const emotion = analyzeEmotion(message);
-  conversationMemory.push({ role: "user", content: message });
 
   switch (emotion) {
     case "stress":
-      return "Jag hör att stressen tar mycket plats hos dig just nu. Ofta handlar stress inte om att vi är svaga, utan om att vi har burit för mycket för länge. Om du stannar upp ett ögonblick – vad är det som just nu känns mest tungt att bära?";
-
-    case "trötthet":
-      return "Trötthet kan vara ett tecken på att något inom dig behöver vila, inte fler lösningar. Är det kroppen som är trött, eller är det snarare själen som längtar efter paus?";
-
-    case "sorg":
-      return "Det låter som att något berör dig på djupet. Du behöver inte ha alla svar nu. Vill du berätta vad som gjorde att den här känslan kom upp just idag?";
+      return "Tack för att du delar. Stress uppstår ofta när vi tar ansvar för mer än vi egentligen har utrymme för. Om du stannar upp ett ögonblick – vad är det som pressar dig mest just nu?";
 
     case "relation":
-      return "Relationer väcker ofta starka känslor eftersom de betyder något. Känns det som att du inte riktigt blir mött, eller är det något du inte vågat säga högt än?";
+      return "Relationer kan väcka både längtan och frustration. Känns det som att du inte blir förstådd, eller handlar det mer om en inre konflikt hos dig själv?";
 
-    case "oro":
-      return "Oro vill ofta skydda oss, men kan ibland ta över. Är det något konkret du oroar dig för, eller mer en diffus känsla som ligger i bakgrunden?";
+    case "energi":
+      return "När energin är låg finns det ofta ett behov som inte blivit mött. Är det vila, glädje eller kanske gränser som saknas just nu?";
+
+    case "självkänsla":
+      return "Att vilja stärka sin självkänsla är ett modigt steg. När tvivlet kommer – vad brukar du säga till dig själv då?";
 
     default:
-      return "Tack för att du delar. Om du lyssnar inåt just nu – vilken känsla är starkast i dig i detta ögonblick?";
+      return "Jag lyssnar. Vill du berätta lite mer om vad som pågår inom dig just nu?";
   }
 }
 
-function sendMessage() {
-  const text = input.value.trim();
-  if (!text) return;
-
-  addMessage(text, "user");
-  input.value = "";
+function respond(message) {
+  conversationMemory.push({ role: "user", content: message });
 
   const thinking = document.createElement("div");
   thinking.className = "message ai thinking";
@@ -63,8 +76,17 @@ function sendMessage() {
 
   setTimeout(() => {
     thinking.remove();
-    const reply = generatePersonalResponse(text);
+    const reply = generateResponse(message);
     conversationMemory.push({ role: "ai", content: reply });
     addMessage(reply, "ai");
-  }, 900);
+  }, 800);
+}
+
+function sendMessage() {
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMessage(text, "user");
+  input.value = "";
+  respond(text);
 }

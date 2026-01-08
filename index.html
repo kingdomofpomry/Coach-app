@@ -4,43 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Din Coach</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <main id="app">
 
-  <div id="app">
+    <img src="icon-512.png" class="logo" />
 
-    <!-- STEG 1 -->
-    <section id="step-1" class="step active">
-      <img src="icon-512.png" class="logo" />
-      <h1>Din Coach</h1>
-      <p>Välj område och få vägledning.</p>
+    <h1>Din Coach</h1>
+    <p>Välj område och få vägledning.</p>
 
-      <div class="language">
-        <button onclick="setLanguage('sv')">🇸🇪 Svenska</button>
-        <button onclick="setLanguage('en')">🇬🇧 English</button>
-      </div>
+    <div class="lang">
+      <button onclick="setLanguage('sv')">🇸🇪 Svenska</button>
+      <button onclick="setLanguage('en')">🇬🇧 English</button>
+    </div>
 
-      <div class="grid">
-        <button onclick="chooseCategory('stress')">😮‍💨 Stress</button>
-        <button onclick="chooseCategory('relation')">❤️ Relation</button>
-        <button onclick="chooseCategory('energi')">⚡ Energi</button>
-        <button onclick="chooseCategory('självkänsla')">🌱 Självkänsla</button>
-        <button onclick="chooseCategory('ekonomi')">💰 Ekonomi</button>
-        <button onclick="chooseCategory('personlig')">🚀 Personlig utveckling</button>
-      </div>
+    <div class="buttons">
+      <button onclick="selectCategory('stress')">😮‍💨 Stress</button>
+      <button onclick="selectCategory('relation')">❤️ Relation</button>
+      <button onclick="selectCategory('energi')">⚡ Energi</button>
+      <button onclick="selectCategory('självkänsla')">🌱 Självkänsla</button>
+      <button onclick="selectCategory('ekonomi')">💰 Ekonomi</button>
+      <button onclick="selectCategory('personlig')">🚀 Personlig utveckling</button>
+    </div>
+
+    <section id="result" hidden>
+      <h2 id="title"></h2>
+      <p id="text"></p>
+      <button onclick="reset()">⬅ Tillbaka</button>
     </section>
 
-    <!-- STEG 2 -->
-    <section id="step-2" class="step">
-      <h2 id="category-title"></h2>
-      <p id="coach-text"></p>
-      <button onclick="goBack()">⬅ Tillbaka</button>
-    </section>
+  </main>
 
-  </div>
-
-  <!-- JS LADDAS SIST -->
-  <script src="./app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

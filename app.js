@@ -2,48 +2,30 @@ let language = "sv";
 
 function setLanguage(lang) {
   language = lang;
-  alert(lang === "sv" ? "Svenska valt" : "English selected");
 }
 
-function chooseCategory(category) {
-  document.getElementById("step-1").classList.remove("active");
-  document.getElementById("step-2").classList.add("active");
-
-  const title = document.getElementById("category-title");
-  const text = document.getElementById("coach-text");
-
+function selectCategory(type) {
   const content = {
-    stress: {
-      sv: "Stress",
-      text: "Stress uppstår ofta när vi bär för mycket. Vad pressar dig mest just nu?"
-    },
-    relation: {
-      sv: "Relation",
-      text: "Relationer speglar ofta våra innersta behov. Vad känns oklart för dig?"
-    },
-    energi: {
-      sv: "Energi",
-      text: "Låg energi är en signal. Vad tror du saknas i din vardag?"
-    },
-    självkänsla: {
-      sv: "Självkänsla",
-      text: "Hur pratar du med dig själv när det är svårt?"
-    },
-    ekonomi: {
-      sv: "Ekonomi",
-      text: "Ekonomi handlar både om pengar och trygghet. Vad vill du förändra?"
-    },
-    personlig: {
-      sv: "Personlig utveckling",
-      text: "Utveckling börjar med medvetenhet. Vem vill du bli?"
-    }
+    stress: "Stress uppstår när vi bär mer än vi orkar. Vad känns tyngst just nu?",
+    relation: "Relationer speglar våra behov. Vad längtar du efter?",
+    energi: "Energi visar vad kroppen behöver. Vad saknas just nu?",
+    självkänsla: "Hur talar du till dig själv när det är svårt?",
+    ekonomi: "Ekonomi handlar om trygghet. Vad vill du förändra?",
+    personlig: "Utveckling börjar med medvetenhet. Vem vill du bli?"
   };
 
-  title.innerText = content[category].sv;
-  text.innerText = content[category].text;
+  document.querySelector(".buttons").style.display = "none";
+  document.querySelector(".lang").style.display = "none";
+
+  const result = document.getElementById("result");
+  document.getElementById("title").innerText = type.toUpperCase();
+  document.getElementById("text").innerText = content[type];
+
+  result.hidden = false;
 }
 
-function goBack() {
-  document.getElementById("step-2").classList.remove("active");
-  document.getElementById("step-1").classList.add("active");
+function reset() {
+  document.getElementById("result").hidden = true;
+  document.querySelector(".buttons").style.display = "grid";
+  document.querySelector(".lang").style.display = "flex";
 }

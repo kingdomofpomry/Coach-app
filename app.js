@@ -1,4 +1,4 @@
-async function send() {
+function send() {
   const input = document.getElementById("input");
   const responseDiv = document.getElementById("response");
 
@@ -7,20 +7,28 @@ async function send() {
     return;
   }
 
-  responseDiv.innerText = "Tänker…";
+  const text = input.value.toLowerCase();
 
-  try {
-    const res = await fetch("/.netlify/functions/ai", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: input.value })
-    });
+  let reply = "Jag hör dig.\n\nTa ett lugnt andetag.\n\n";
 
-    const data = await res.json();
-    responseDiv.innerText =
-      data.reply || "Jag är här 🌱 Vill du formulera det lite annorlunda?";
-  } catch {
-    responseDiv.innerText =
-      "Jag tappade kontakten en stund 🌧️ Försök igen snart.";
+  if (text.includes("stress") || text.includes("trött")) {
+    reply +=
+      "Stress är ofta ett tecken på att något behöver få lite mer utrymme eller vila.\n\n" +
+      "Vad känns mest pressande just nu?";
+  } else if (text.includes("relation") || text.includes("partner")) {
+    reply +=
+      "Relationer väcker mycket känslor, särskilt när man bryr sig.\n\n" +
+      "Vad är det du innerst inne önskar ska bli bättre?";
+  } else if (text.includes("barn") || text.includes("familj")) {
+    reply +=
+      "När det gäller barn och familj är lugn och närvaro viktigare än perfektion.\n\n" +
+      "Vad hade känts som ett snällt nästa steg?";
+  } else {
+    reply +=
+      "Det du delar är viktigt.\n\n" +
+      "Vill du utforska känslan bakom det du skrev, eller situationen runt omkring?";
   }
+
+  responseDiv.innerText = reply;
+  input.value = "";
 }

@@ -34,39 +34,38 @@ const exercises = {
   ]
 };
 
-const categoryButtons = document.querySelectorAll("[data-cat]");
-const guidance = document.getElementById("guidance");
 const categories = document.getElementById("categories");
+const guidance = document.getElementById("guidance");
 const title = document.getElementById("categoryTitle");
 const text = document.getElementById("exerciseText");
 const nextBtn = document.getElementById("nextBtn");
 const backBtn = document.getElementById("backBtn");
 
-categoryButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
+document.querySelectorAll("[data-cat]").forEach(btn => {
+  btn.onclick = () => {
     currentCategory = btn.dataset.cat;
     index = 0;
 
     categories.style.display = "none";
-    guidance.classList.remove("hidden");
+    guidance.style.display = "block";
 
     title.innerText = btn.innerText;
     text.innerText = exercises[currentCategory][index];
-
-    nextBtn.disabled = false;
-  });
+  };
 });
 
-nextBtn.addEventListener("click", () => {
+// 🔥 HÄR ÄR FIXEN
+function nextExercise() {
   if (!currentCategory) return;
-
-  index++;
-  if (index >= exercises[currentCategory].length) index = 0;
+  index = (index + 1) % exercises[currentCategory].length;
   text.innerText = exercises[currentCategory][index];
-});
+}
 
-backBtn.addEventListener("click", () => {
-  guidance.classList.add("hidden");
+nextBtn.onclick = nextExercise;
+nextBtn.ontouchstart = nextExercise;
+
+backBtn.onclick = () => {
+  guidance.style.display = "none";
   categories.style.display = "grid";
   currentCategory = null;
-});
+};

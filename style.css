@@ -1,6 +1,4 @@
-/* ========================= */
 /* RESET */
-/* ========================= */
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -13,30 +11,22 @@ body {
   color: white;
 }
 
-/* ========================= */
-/* APP CONTAINER */
-/* ========================= */
+/* APP */
 .app {
   min-height: 100vh;
   padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  z-index: 1;
 }
 
-/* ========================= */
 /* LOGO */
-/* ========================= */
 .logo {
   width: 180px;
   margin-bottom: 16px;
 }
 
-/* ========================= */
 /* TITLES */
-/* ========================= */
 h1 {
   margin: 8px 0;
   font-size: 28px;
@@ -49,9 +39,7 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* ========================= */
-/* LANGUAGE BUTTONS */
-/* ========================= */
+/* LANGUAGE */
 .language {
   display: flex;
   gap: 12px;
@@ -67,9 +55,7 @@ h1 {
   font-size: 14px;
 }
 
-/* ========================= */
-/* CATEGORY BUTTONS */
-/* ========================= */
+/* CATEGORIES */
 .categories {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -88,9 +74,7 @@ h1 {
   font-size: 16px;
 }
 
-/* ========================= */
-/* CHAT / GUIDANCE */
-/* ========================= */
+/* CHAT */
 .chat {
   width: 100%;
   max-width: 420px;
@@ -118,26 +102,7 @@ h1 {
   font-size: 16px;
 }
 
-/* ========================= */
-/* NAV BUTTONS */
-/* ========================= */
-.nav {
-  display: flex;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.nav button {
-  padding: 12px 18px;
-  border-radius: 16px;
-  border: none;
-  background: rgba(255,255,255,0.15);
-  color: white;
-}
-
-/* ========================= */
-/* ✅ CLICK FIX – ENDA SOM BEHÖVS */
-/* ========================= */
+/* BUTTONS – VIKTIGAST */
 button,
 textarea,
 input {

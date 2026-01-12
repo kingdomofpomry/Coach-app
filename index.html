@@ -3,12 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Din Coach</title>
+  <title>Din Coach – Key of Life</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <div class="app">
 
-  <div id="app">Laddar…</div>
+    <!-- LOGO -->
+    <img src="icon-512.png" alt="Key of Life" class="logo" />
 
+    <h1>Din Coach</h1>
+    <p class="subtitle">Välj område och få vägledning.</p>
+
+    <!-- SPRÅK -->
+    <div class="language">
+      <button class="chip active">🇸🇪 Svenska</button>
+      <button class="chip">🇬🇧 English</button>
+    </div>
+
+    <!-- KATEGORIER -->
+    <div class="categories">
+      <button onclick="selectCategory('Stress')">😔 Stress</button>
+      <button onclick="selectCategory('Relation')">❤️ Relation</button>
+      <button onclick="selectCategory('Energi')">⚡ Energi</button>
+      <button onclick="selectCategory('Självkänsla')">🌱 Självkänsla</button>
+      <button onclick="selectCategory('Ekonomi')">💰 Ekonomi</button>
+      <button onclick="selectCategory('Personlig utveckling')">🚀 Personlig utveckling</button>
+    </div>
+
+    <!-- VÄGLEDNING -->
+    <div id="guidance" class="guidance hidden">
+      <h2 id="categoryTitle"></h2>
+      <p id="categoryText"></p>
+
+      <textarea id="userInput" placeholder="Skriv vad du vill ha vägledning kring..."></textarea>
+      <button class="primary" onclick="getGuidance()">Få vägledning</button>
+
+      <div id="response" class="response"></div>
+
+      <button class="back" onclick="goBack()">⬅ Tillbaka</button>
+    </div>
+
+  </div>
+
+  <!-- JS -->
   <script src="app.js"></script>
 </body>
 </html>

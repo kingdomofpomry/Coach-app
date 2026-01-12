@@ -6,24 +6,23 @@
   <title>Din Coach</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- ❌ INGET overlay-div här -->
+  <!-- ❌ INGET fullscreen background-layer -->
 
   <div class="app">
 
-    <!-- LOGO -->
-    <img src="icon-512.png" alt="Key of Life" class="logo" />
+    <img src="icon-512.png" class="logo" alt="Key of Life" />
 
-    <!-- TITEL -->
     <h1>Din Coach</h1>
-    <p>Välj område och få vägledning.</p>
+    <p class="subtitle">Välj område och få vägledning.</p>
 
-    <!-- SPRÅK -->
     <div class="language">
-      <button onclick="setLanguage('sv')">🇸🇪 Svenska</button>
-      <button onclick="setLanguage('en')">🇬🇧 English</button>
+      <button id="lang-sv">🇸🇪 Svenska</button>
+      <button id="lang-en">🇬🇧 English</button>
     </div>
 
-    <!-- KATEGORIER -->
     <div class="categories">
       <button onclick="selectCategory('stress')">😔 Stress</button>
       <button onclick="selectCategory('relation')">❤️ Relation</button>
@@ -33,14 +32,10 @@
       <button onclick="selectCategory('utveckling')">🚀 Personlig utveckling</button>
     </div>
 
-    <!-- CHAT / VÄGLEDNING -->
     <div class="chat">
-      <textarea id="userInput" placeholder="Vad vill du ha hjälp med just nu?"></textarea>
-      <button onclick="getGuidance()">Få vägledning</button>
+      <textarea id="input" placeholder="Skriv här vad du vill ha hjälp med…"></textarea>
+      <button onclick="send()">Få vägledning</button>
     </div>
-
-    <!-- SVAR -->
-    <div id="response" class="response"></div>
 
   </div>
 

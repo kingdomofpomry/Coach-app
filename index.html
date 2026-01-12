@@ -2,45 +2,40 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Din Coach</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="app">
+  <div id="app">
 
-  <img src="icon-512.png" class="logo">
+    <!-- START -->
+    <div id="categories">
+      <h1>Din Coach</h1>
+      <p>Välj område och få vägledning.</p>
 
-  <h1>Din Coach</h1>
-  <p>Välj område och få vägledning.</p>
+      <div class="grid">
+        <button data-cat="stress">😔 Stress</button>
+        <button data-cat="relation">❤️ Relation</button>
+        <button data-cat="energi">⚡ Energi</button>
+        <button data-cat="sjalvkansla">🌱 Självkänsla</button>
+        <button data-cat="ekonomi">💰 Ekonomi</button>
+        <button data-cat="utveckling">🚀 Personlig utveckling</button>
+      </div>
+    </div>
 
-  <div class="language">
-    <button id="svBtn">🇸🇪 Svenska</button>
-    <button id="enBtn">🇬🇧 English</button>
-  </div>
+    <!-- VÄGLEDNING -->
+    <div id="guidance" style="display:none;">
+      <h2 id="categoryTitle"></h2>
+      <p id="exerciseText"></p>
 
-  <div id="categories" class="categories">
-    <button data-cat="stress">😔 Stress</button>
-    <button data-cat="relation">❤️ Relation</button>
-    <button data-cat="energi">⚡ Energi</button>
-    <button data-cat="självkansla">🌱 Självkänsla</button>
-    <button data-cat="ekonomi">💰 Ekonomi</button>
-    <button data-cat="utveckling">🚀 Personlig utveckling</button>
-  </div>
-
-  <div id="guidance" class="hidden">
-    <h2 id="categoryTitle"></h2>
-    <p id="exerciseText"></p>
-
-    <div class="actions">
       <button id="nextBtn">➡️ Nästa övning</button>
       <button id="backBtn">⬅️ Tillbaka</button>
     </div>
+
   </div>
 
-</div>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

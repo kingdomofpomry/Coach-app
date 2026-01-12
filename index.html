@@ -1,52 +1,39 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Din Coach</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <div class="app">
 
-    <img src="icon-512.png" class="logo" />
+<div class="app">
+  <img src="icon-512.png" class="logo">
 
-    <h1>Din Coach</h1>
-    <p>Välj område och få vägledning.</p>
+  <h1>Din Coach</h1>
 
-    <div class="language">
-      <button>🇸🇪 Svenska</button>
-      <button>🇬🇧 English</button>
-    </div>
-
-    <!-- KATEGORIER -->
-    <div class="categories">
-
-      <button onclick="selectCategory('Stress')">😌 Stress</button>
-      <button onclick="selectCategory('Relation')">❤️ Relation</button>
-      <button onclick="selectCategory('Energi')">⚡ Energi</button>
-      <button onclick="selectCategory('Självkänsla')">🌱 Självkänsla</button>
-      <button onclick="selectCategory('Ekonomi')">💰 Ekonomi</button>
-      <button onclick="selectCategory('Personlig utveckling')">🚀 Personlig utveckling</button>
-
-    </div>
-
-    <!-- VÄGLEDNING -->
-    <div id="guidance" class="hidden">
-      <h2 id="categoryTitle"></h2>
-      <p id="categoryText"></p>
-
-      <textarea id="userInput" placeholder="Skriv här..."></textarea>
-      <button onclick="getGuidance()">Få vägledning</button>
-
-      <p id="response"></p>
-
-      <button onclick="goBack()">⬅ Tillbaka</button>
-    </div>
-
+  <div class="language">
+    <button onclick="alert('SV')">🇸🇪 Svenska</button>
+    <button onclick="alert('EN')">🇬🇧 English</button>
   </div>
 
-  <script src="app.js"></script>
+  <div class="categories">
+    <button onclick="selectCategory('Stress')">😌 Stress</button>
+    <button onclick="selectCategory('Relation')">❤️ Relation</button>
+    <button onclick="selectCategory('Energi')">⚡ Energi</button>
+    <button onclick="selectCategory('Självkänsla')">🌱 Självkänsla</button>
+    <button onclick="selectCategory('Ekonomi')">💰 Ekonomi</button>
+    <button onclick="selectCategory('Personlig')">🚀 Personlig utveckling</button>
+  </div>
+
+  <div id="guidance" class="hidden">
+    <h2 id="title"></h2>
+    <textarea placeholder="Skriv här..."></textarea>
+    <button onclick="goBack()">⬅ Tillbaka</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>

@@ -131,3 +131,27 @@ textarea {
 .bg-overlay {
   pointer-events: none;
 }
+/* 🔥 ABSOLUT CLICK FIX – SISTA ORDET */
+button,
+textarea,
+input {
+  pointer-events: auto !important;
+  z-index: 10;
+  position: relative;
+}
+
+.app,
+.content,
+.main {
+  position: relative;
+  z-index: 10;
+}
+
+/* ALLA BAKGRUNDER SKA VARA BAKOM */
+.background,
+.bg,
+.bg-overlay,
+.overlay {
+  pointer-events: none !important;
+  z-index: 0 !important;
+}

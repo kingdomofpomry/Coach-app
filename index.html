@@ -8,31 +8,39 @@
 </head>
 <body>
 
-  <div id="app">
+  <div class="app">
 
-    <!-- START -->
-    <div id="categories">
-      <h1>Din Coach</h1>
-      <p>Välj område och få vägledning.</p>
+    <!-- LOGO -->
+    <img src="icon-512.png" alt="Key of Life" class="logo" />
 
-      <div class="grid">
-        <button data-cat="stress">😔 Stress</button>
-        <button data-cat="relation">❤️ Relation</button>
-        <button data-cat="energi">⚡ Energi</button>
-        <button data-cat="sjalvkansla">🌱 Självkänsla</button>
-        <button data-cat="ekonomi">💰 Ekonomi</button>
-        <button data-cat="utveckling">🚀 Personlig utveckling</button>
-      </div>
+    <!-- TITEL -->
+    <h1>Din Coach</h1>
+    <p>Välj område och få vägledning.</p>
+
+    <!-- SPRÅK -->
+    <div class="language">
+      <button onclick="setLanguage('sv')">🇸🇪 Svenska</button>
+      <button onclick="setLanguage('en')">🇬🇧 English</button>
     </div>
 
-    <!-- VÄGLEDNING -->
-    <div id="guidance" style="display:none;">
-      <h2 id="categoryTitle"></h2>
-      <p id="exerciseText"></p>
-
-      <button id="nextBtn">➡️ Nästa övning</button>
-      <button id="backBtn">⬅️ Tillbaka</button>
+    <!-- KATEGORIER -->
+    <div class="categories">
+      <button onclick="selectCategory('stress')">😔 Stress</button>
+      <button onclick="selectCategory('relation')">❤️ Relation</button>
+      <button onclick="selectCategory('energi')">⚡ Energi</button>
+      <button onclick="selectCategory('självkänsla')">🌱 Självkänsla</button>
+      <button onclick="selectCategory('ekonomi')">💰 Ekonomi</button>
+      <button onclick="selectCategory('utveckling')">🚀 Personlig utveckling</button>
     </div>
+
+    <!-- CHAT / VÄGLEDNING -->
+    <div class="chat">
+      <textarea id="userInput" placeholder="Vad vill du ha hjälp med just nu?"></textarea>
+      <button onclick="getGuidance()">Få vägledning</button>
+    </div>
+
+    <!-- SVAR -->
+    <div id="response" class="response"></div>
 
   </div>
 

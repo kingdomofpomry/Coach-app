@@ -56,3 +56,10 @@ textarea {
   min-height: 80px;
   margin: 12px 0;
 }
+button, .btn {
+  pointer-events: auto;
+}
+
+body * {
+  pointer-events: auto;
+}

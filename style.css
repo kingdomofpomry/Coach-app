@@ -125,10 +125,6 @@ textarea {
   pointer-events: auto !important;
   cursor: pointer !important;
 }
-
-button * {
-  pointer-events: none;
-}
 .overlay,
 .background,
 .bg,

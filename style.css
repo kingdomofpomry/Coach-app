@@ -1,4 +1,6 @@
+/* ========================= */
 /* RESET */
+/* ========================= */
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -11,22 +13,30 @@ body {
   color: white;
 }
 
+/* ========================= */
 /* APP CONTAINER */
+/* ========================= */
 .app {
   min-height: 100vh;
   padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
+/* ========================= */
 /* LOGO */
+/* ========================= */
 .logo {
   width: 180px;
   margin-bottom: 16px;
 }
 
+/* ========================= */
 /* TITLES */
+/* ========================= */
 h1 {
   margin: 8px 0;
   font-size: 28px;
@@ -39,7 +49,9 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* LANGUAGE */
+/* ========================= */
+/* LANGUAGE BUTTONS */
+/* ========================= */
 .language {
   display: flex;
   gap: 12px;
@@ -55,7 +67,9 @@ h1 {
   font-size: 14px;
 }
 
-/* CATEGORIES */
+/* ========================= */
+/* CATEGORY BUTTONS */
+/* ========================= */
 .categories {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -74,7 +88,9 @@ h1 {
   font-size: 16px;
 }
 
+/* ========================= */
 /* CHAT / GUIDANCE */
+/* ========================= */
 .chat {
   width: 100%;
   max-width: 420px;
@@ -102,7 +118,9 @@ h1 {
   font-size: 16px;
 }
 
+/* ========================= */
 /* NAV BUTTONS */
+/* ========================= */
 .nav {
   display: flex;
   gap: 12px;
@@ -118,43 +136,11 @@ h1 {
 }
 
 /* ========================= */
-/* 🔥 CLICK FIX – VIKTIGAST */
+/* ✅ CLICK FIX – ENDA SOM BEHÖVS */
 /* ========================= */
 button,
-textarea {
-  pointer-events: auto !important;
-  cursor: pointer !important;
-}
-.overlay,
-.background,
-.bg,
-
-/* 🔥 ABSOLUT CLICK FIX – SISTA ORDET */
-button,
 textarea,
 input {
-  pointer-events: auto !important;
-  z-index: 10;
-  position: relative;
-}
-
-.app,
-.content,
-.main {
-  position: relative;
-  z-index: 10;
-}
-
-/* ALLA BAKGRUNDER SKA VARA BAKOM */
-.background,
-.bg,
-.bg-overlay,
-
-button,
-textarea,
-input {
-  pointer-events: auto !important;
+  pointer-events: auto;
   cursor: pointer;
-  z-index: 10;
-  position: relative;
 }

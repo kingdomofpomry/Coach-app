@@ -9,32 +9,36 @@
 <body>
 
 <div class="app">
+
   <img src="icon-512.png" class="logo">
 
-  <h1 id="appTitle">Din Coach</h1>
-  <p id="subtitle">Välj område och få vägledning.</p>
+  <h1>Din Coach</h1>
+  <p>Välj område och få vägledning.</p>
 
   <div class="language">
-    <button onclick="setLanguage('sv')">🇸🇪 Svenska</button>
-    <button onclick="setLanguage('en')">🇬🇧 English</button>
+    <button id="svBtn">🇸🇪 Svenska</button>
+    <button id="enBtn">🇬🇧 English</button>
   </div>
 
-  <div class="categories">
-    <button onclick="selectCategory('stress')">😔 Stress</button>
-    <button onclick="selectCategory('relation')">❤️ Relation</button>
-    <button onclick="selectCategory('energi')">⚡ Energi</button>
-    <button onclick="selectCategory('självkänsla')">🌱 Självkänsla</button>
-    <button onclick="selectCategory('ekonomi')">💰 Ekonomi</button>
-    <button onclick="selectCategory('utveckling')">🚀 Personlig utveckling</button>
+  <div id="categories" class="categories">
+    <button data-cat="stress">😔 Stress</button>
+    <button data-cat="relation">❤️ Relation</button>
+    <button data-cat="energi">⚡ Energi</button>
+    <button data-cat="självkansla">🌱 Självkänsla</button>
+    <button data-cat="ekonomi">💰 Ekonomi</button>
+    <button data-cat="utveckling">🚀 Personlig utveckling</button>
   </div>
 
   <div id="guidance" class="hidden">
     <h2 id="categoryTitle"></h2>
-    <p id="dailyText"></p>
+    <p id="exerciseText"></p>
 
-    <button onclick="nextExercise()">➡️ Nästa övning</button>
-    <button onclick="goBack()">⬅ Tillbaka</button>
+    <div class="actions">
+      <button id="nextBtn">➡️ Nästa övning</button>
+      <button id="backBtn">⬅️ Tillbaka</button>
+    </div>
   </div>
+
 </div>
 
 <script src="app.js"></script>

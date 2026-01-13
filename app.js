@@ -235,3 +235,10 @@ setInterval(() => {
     setTimeout(()=>window._notified=false, 60000);
   }
 }, 30000);
+function enableReminders() {
+  alert("🔔 Påminnelser aktiverade (nästa steg: riktig notis)");
+}
+
+function scheduleDaily() {
+  alert("⏰ Daglig påminnelse sparad (nästa steg: tid & schema)");
+}

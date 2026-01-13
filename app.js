@@ -5,88 +5,34 @@ console.log("app.js laddad");
 ========================= */
 const exercises = {
   stress: [
-    {
-      title: "Reflektion",
-      text: "Vad är den största källan till stress i ditt liv just nu?"
-    },
-    {
-      title: "Handling",
-      text: "Skriv ner EN sak du kan göra idag för att minska stressen, även om den är liten."
-    },
-    {
-      title: "Tankemönster",
-      text: "Vilken tanke gör stressen värre – och hur kan du formulera den mer vänligt?"
-    }
-  ],
-  ekonomi: [
-    {
-      title: "Reflektion",
-      text: "Vad i din ekonomi skapar mest oro just nu?"
-    },
-    {
-      title: "Handling",
-      text: "Skriv ner en konkret åtgärd du kan ta denna vecka för mer ekonomisk trygghet."
-    },
-    {
-      title: "Tankemönster",
-      text: "Vilken begränsande tanke har du kring pengar – och vad vore en mer stärkande tanke?"
-    }
-  ],
-  energi: [
-    {
-      title: "Reflektion",
-      text: "När på dagen känner du dig mest dränerad?"
-    },
-    {
-      title: "Handling",
-      text: "Vad är EN sak du kan göra imorgon för att ge dig mer energi?"
-    },
-    {
-      title: "Tankemönster",
-      text: "Vad säger du till dig själv när du är trött – hjälper det dig?"
-    }
+    { title: "Reflektion", text: "Vad är den största källan till stress i ditt liv just nu?" },
+    { title: "Handling", text: "Vad är EN liten sak du kan göra idag för att minska stress?" },
+    { title: "Tankemönster", text: "Vilken tanke gör stressen värre – och hur kan du formulera den snällare?" }
   ],
   relation: [
-    {
-      title: "Reflektion",
-      text: "Vilken relation upptar mest av dina tankar just nu?"
-    },
-    {
-      title: "Handling",
-      text: "Finns det ett ärligt samtal eller en gräns som behöver sättas?"
-    },
-    {
-      title: "Tankemönster",
-      text: "Vilken roll tar du oftast i relationer – och vill du fortsätta så?"
-    }
+    { title: "Reflektion", text: "Vilken relation tar mest energi just nu?" },
+    { title: "Handling", text: "Finns det något som behöver sägas eller sättas gräns för?" },
+    { title: "Tankemönster", text: "Vilken roll tar du oftast i relationer?" }
+  ],
+  energi: [
+    { title: "Reflektion", text: "När på dagen känner du dig mest dränerad?" },
+    { title: "Handling", text: "Vad kan du göra imorgon för att få mer energi?" },
+    { title: "Tankemönster", text: "Vilken vana stjäl mest av din energi?" }
   ],
   självkänsla: [
-    {
-      title: "Reflektion",
-      text: "När tvivlar du som mest på dig själv?"
-    },
-    {
-      title: "Handling",
-      text: "Skriv ner en handling som stärker din självkänsla idag."
-    },
-    {
-      title: "Tankemönster",
-      text: "Hur skulle du prata med en vän i samma situation?"
-    }
+    { title: "Reflektion", text: "När tvivlar du mest på dig själv?" },
+    { title: "Handling", text: "Vad kan stärka din självkänsla idag?" },
+    { title: "Tankemönster", text: "Hur skulle du prata med en vän i samma situation?" }
+  ],
+  ekonomi: [
+    { title: "Reflektion", text: "Vad i din ekonomi skapar mest oro just nu?" },
+    { title: "Handling", text: "Vilket litet steg kan öka din ekonomiska trygghet?" },
+    { title: "Tankemönster", text: "Vilken tanke om pengar håller dig tillbaka?" }
   ],
   utveckling: [
-    {
-      title: "Reflektion",
-      text: "Vad vill du egentligen växa inom just nu?"
-    },
-    {
-      title: "Handling",
-      text: "Vilket litet steg kan du ta denna vecka?"
-    },
-    {
-      title: "Tankemönster",
-      text: "Vad håller dig tillbaka – rädsla eller vana?"
-    }
+    { title: "Reflektion", text: "Vad vill du växa inom just nu?" },
+    { title: "Handling", text: "Vilket första steg kan du ta denna vecka?" },
+    { title: "Tankemönster", text: "Vad hindrar dig – rädsla eller vana?" }
   ]
 };
 
@@ -99,146 +45,99 @@ let currentStep = 0;
 /* =========================
    ELEMENT
 ========================= */
-const input = document.getElementById("input");
-const chat = document.querySelector(".chat");
+const app = document.querySelector(".app");
 
 /* =========================
-   CATEGORY
+   START PROGRAM
 ========================= */
 function selectCategory(category) {
   currentCategory = category;
   currentStep = 0;
-
-  addBotMessage(
-    exercises[category][0].title,
-    exercises[category][0].text
-  );
-
-  showNextButton();
+  renderCard();
 }
 
 /* =========================
-   SEND TEXT
+   RENDER CARD
 ========================= */
-function send() {
-  const text = input.value.trim();
-  if (!text) return;
+function renderCard() {
+  const data = exercises[currentCategory][currentStep];
 
-  addUserMessage(text);
-  input.value = "";
+  let card = document.getElementById("exercise-card");
+  if (!card) {
+    card = document.createElement("div");
+    card.id = "exercise-card";
+    card.style.width = "100%";
+    card.style.maxWidth = "420px";
+    card.style.marginTop = "24px";
+    card.style.padding = "20px";
+    card.style.borderRadius = "20px";
+    card.style.background = "rgba(255,255,255,0.12)";
+    app.appendChild(card);
+  }
+
+  card.innerHTML = `
+    <h3>${data.title}</h3>
+    <p>${data.text}</p>
+    <button onclick="nextExercise()">Nästa övning</button>
+    <div style="margin-top:12px; display:flex; gap:12px;">
+      <button onclick="enableReminders()">🔔 Påminnelse</button>
+      <button onclick="scheduleDaily()">⏰ Daglig</button>
+    </div>
+  `;
 }
 
 /* =========================
    NEXT EXERCISE
 ========================= */
 function nextExercise() {
-  if (!currentCategory) return;
-
   currentStep++;
 
-  const steps = exercises[currentCategory];
-
-  if (currentStep < steps.length) {
-    addBotMessage(
-      steps[currentStep].title,
-      steps[currentStep].text
-    );
-  } else {
-    addBotMessage(
-      "Avslut",
-      "Bra jobbat. Vill du fortsätta med en ny kategori eller repetera denna?"
-    );
-    hideNextButton();
-  }
-}
-
-/* =========================
-   UI HELPERS
-========================= */
-function addUserMessage(text) {
-  const div = document.createElement("div");
-  div.className = "user-msg";
-  div.textContent = text;
-  chat.appendChild(div);
-}
-
-function addBotMessage(title, text) {
-  const div = document.createElement("div");
-  div.className = "bot-msg";
-  div.innerHTML = `<strong>${title}</strong><br>${text}`;
-  chat.appendChild(div);
-}
-
-function showNextButton() {
-  let btn = document.getElementById("next-btn");
-  if (!btn) {
-    btn = document.createElement("button");
-    btn.id = "next-btn";
-    btn.textContent = "Nästa övning";
-    btn.onclick = nextExercise;
-    btn.style.marginTop = "12px";
-    chat.appendChild(btn);
-  }
-}
-
-function hideNextButton() {
-  const btn = document.getElementById("next-btn");
-  if (btn) btn.remove();
-}
-
-/* =========================
-   LANGUAGE (placeholder)
-========================= */
-document.getElementById("lang-sv")?.addEventListener("click", () => {
-  alert("Svenska valt");
-});
-document.getElementById("lang-en")?.addEventListener("click", () => {
-  alert("English coming soon");
-});
-function enableReminders() {
-  if (!("Notification" in window)) {
-    alert("Påminnelser stöds inte i denna webbläsare.");
+  if (currentStep >= exercises[currentCategory].length) {
+    showFinish();
     return;
   }
 
-  Notification.requestPermission().then(p => {
-    if (p === "granted") {
-      alert("Påminnelser aktiverade ✅");
-      localStorage.setItem("reminders", "on");
-    }
-  });
+  renderCard();
 }
 
-function scheduleDaily() {
-  if (Notification.permission !== "granted") {
-    alert("Aktivera påminnelser först");
-    return;
-  }
-
-  localStorage.setItem("dailyReminder", "20:00");
-  alert("Daglig påminnelse satt kl 20:00");
+/* =========================
+   FINISH
+========================= */
+function showFinish() {
+  const card = document.getElementById("exercise-card");
+  card.innerHTML = `
+    <h3>Bra jobbat</h3>
+    <p>Du har slutfört dagens övningar.</p>
+    <button onclick="resetProgram()">Välj nytt område</button>
+  `;
 }
 
-// KÖRS AUTOMATISKT
-setInterval(() => {
-  const time = localStorage.getItem("dailyReminder");
-  if (!time) return;
+/* =========================
+   RESET
+========================= */
+function resetProgram() {
+  currentCategory = null;
+  currentStep = 0;
+  const card = document.getElementById("exercise-card");
+  if (card) card.remove();
+}
 
-  const now = new Date();
-  const current = now.toTimeString().slice(0,5);
-
-  if (current === time && !window._notified) {
-    new Notification("Din Coach", {
-      body: "Dags för dagens övning ✨"
-    });
-    window._notified = true;
-    setTimeout(()=>window._notified=false, 60000);
-  }
-}, 30000);
+/* =========================
+   REMINDERS (LOKALT)
+========================= */
 function enableReminders() {
-  alert("🔔 Påminnelser aktiverade (nästa steg: riktig notis)");
+  localStorage.setItem("reminder", JSON.stringify({
+    category: currentCategory,
+    step: currentStep
+  }));
+  alert("Påminnelse kopplad till denna övning");
 }
 
 function scheduleDaily() {
-  alert("⏰ Daglig påminnelse sparad (nästa steg: tid & schema)");
+  localStorage.setItem("dailyReminder", JSON.stringify({
+    category: currentCategory,
+    step: currentStep,
+    time: "20:00"
+  }));
+  alert("Daglig påminnelse sparad");
 }

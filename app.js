@@ -1,21 +1,23 @@
 console.log("app.js laddad");
 
-/* DATA */
+/* =========================
+   DATA – ÖVNINGAR
+========================= */
 const exercises = {
   stress: [
     { title: "Reflektion", text: "Vad är den största källan till stress i ditt liv just nu?" },
-    { title: "Handling", text: "Gör EN liten sak idag som lugnar ditt nervsystem." },
+    { title: "Handling", text: "Gör EN liten sak idag som minskar stressen." },
     { title: "Tankemönster", text: "Vilken tanke gör stressen värre – och hur kan du formulera den snällare?" }
   ],
   energi: [
     { title: "Reflektion", text: "När på dagen tappar du mest energi?" },
-    { title: "Handling", text: "Vad kan du ändra imorgon för att få mer energi?" },
+    { title: "Handling", text: "Vad kan du ändra imorgon för mer energi?" },
     { title: "Tankemönster", text: "Vad säger du till dig själv när du är trött?" }
   ],
   ekonomi: [
     { title: "Reflektion", text: "Vad i din ekonomi skapar mest oro just nu?" },
-    { title: "Handling", text: "Identifiera EN konkret förbättring du kan göra denna vecka." },
-    { title: "Tankemönster", text: "Vilken tanke om pengar begränsar dig mest?" }
+    { title: "Handling", text: "Identifiera EN konkret förbättring denna vecka." },
+    { title: "Tankemönster", text: "Vilken tanke om pengar begränsar dig?" }
   ],
   relation: [
     { title: "Reflektion", text: "Vilken relation påverkar dig mest just nu?" },
@@ -34,48 +36,86 @@ const exercises = {
   ]
 };
 
-let currentCategory = null;
-let step = 0;
+/* =========================
+   STATE (SPARAS)
+========================= */
+let currentCategory = localStorage.getItem("category");
+let currentStep = Number(localStorage.getItem("step")) || 0;
 
+/* =========================
+   ELEMENT
+========================= */
 const card = document.getElementById("exercise-card");
 const titleEl = document.getElementById("card-title");
 const textEl = document.getElementById("card-text");
 const nextBtn = document.getElementById("next-btn");
 
-function selectCategory(cat) {
-  currentCategory = cat;
-  step = 0;
+/* =========================
+   INIT – ÅTERUPPTA
+========================= */
+if (currentCategory && exercises[currentCategory]) {
   showStep();
 }
 
+/* =========================
+   CATEGORY
+========================= */
+function selectCategory(category) {
+  currentCategory = category;
+  currentStep = 0;
+  saveProgress();
+  showStep();
+}
+
+/* =========================
+   SHOW STEP
+========================= */
 function showStep() {
-  const data = exercises[currentCategory][step];
+  const data = exercises[currentCategory][currentStep];
   card.classList.remove("hidden");
   titleEl.textContent = data.title;
   textEl.textContent = data.text;
 
   nextBtn.textContent =
-    step < exercises[currentCategory].length - 1
+    currentStep < exercises[currentCategory].length - 1
       ? "Nästa övning"
       : "Avsluta";
 }
 
+/* =========================
+   NEXT
+========================= */
 nextBtn.onclick = () => {
-  step++;
-  if (step < exercises[currentCategory].length) {
+  currentStep++;
+
+  if (currentStep < exercises[currentCategory].length) {
+    saveProgress();
     showStep();
   } else {
-    titleEl.textContent = "Bra jobbat ✨";
-    textEl.textContent = "Vill du fortsätta eller välja en ny kategori?";
-    nextBtn.style.display = "none";
+    localStorage.setItem("lastCompleted", currentCategory);
+    card.innerHTML = `
+      <h3>Bra jobbat ✨</h3>
+      <p>Du har slutfört denna övning.</p>
+    `;
+    localStorage.removeItem("step");
   }
 };
 
-/* PÅMINNELSER – placeholder */
+/* =========================
+   SAVE
+========================= */
+function saveProgress() {
+  localStorage.setItem("category", currentCategory);
+  localStorage.setItem("step", currentStep);
+}
+
+/* =========================
+   PÅMINNELSER (placeholder)
+========================= */
 function enableReminders() {
-  alert("🔔 Påminnelser aktiverade (logik kommer i nästa steg)");
+  alert("🔔 Påminnelser kopplas till din personliga övning (nästa steg)");
 }
 
 function scheduleDaily() {
-  alert("⏰ Daglig påminnelse sparad (tid & schema nästa steg)");
+  alert("⏰ Daglig påminnelse sparad för din plan");
 }

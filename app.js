@@ -195,3 +195,43 @@ document.getElementById("lang-sv")?.addEventListener("click", () => {
 document.getElementById("lang-en")?.addEventListener("click", () => {
   alert("English coming soon");
 });
+function enableReminders() {
+  if (!("Notification" in window)) {
+    alert("Påminnelser stöds inte i denna webbläsare.");
+    return;
+  }
+
+  Notification.requestPermission().then(p => {
+    if (p === "granted") {
+      alert("Påminnelser aktiverade ✅");
+      localStorage.setItem("reminders", "on");
+    }
+  });
+}
+
+function scheduleDaily() {
+  if (Notification.permission !== "granted") {
+    alert("Aktivera påminnelser först");
+    return;
+  }
+
+  localStorage.setItem("dailyReminder", "20:00");
+  alert("Daglig påminnelse satt kl 20:00");
+}
+
+// KÖRS AUTOMATISKT
+setInterval(() => {
+  const time = localStorage.getItem("dailyReminder");
+  if (!time) return;
+
+  const now = new Date();
+  const current = now.toTimeString().slice(0,5);
+
+  if (current === time && !window._notified) {
+    new Notification("Din Coach", {
+      body: "Dags för dagens övning ✨"
+    });
+    window._notified = true;
+    setTimeout(()=>window._notified=false, 60000);
+  }
+}, 30000);

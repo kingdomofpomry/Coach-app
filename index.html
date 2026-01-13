@@ -6,42 +6,43 @@
   <title>Din Coach</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <!-- ❌ INGET overlay-div här -->
-  <!-- ❌ INGET fullscreen background-layer -->
 
-  <div class="app">
+<div class="app">
 
-    <img src="icon-512.png" class="logo" alt="Key of Life" />
+  <img src="icon-512.png" class="logo" alt="Key of Life" />
 
-    <h1>Din Coach</h1>
-    <p class="subtitle">Välj område och få vägledning.</p>
+  <h1>Din Coach</h1>
+  <p class="subtitle">Välj område och få vägledning.</p>
 
-    <div class="language">
-      <button id="lang-sv">🇸🇪 Svenska</button>
-      <button id="lang-en">🇬🇧 English</button>
-    </div>
+  <div class="language">
+    <button id="lang-sv">🇸🇪 Svenska</button>
+    <button id="lang-en">🇬🇧 English</button>
+  </div>
 
-    <div class="categories">
-      <button onclick="selectCategory('stress')">😔 Stress</button>
-      <button onclick="selectCategory('relation')">❤️ Relation</button>
-      <button onclick="selectCategory('energi')">⚡ Energi</button>
-      <button onclick="selectCategory('självkänsla')">🌱 Självkänsla</button>
-      <button onclick="selectCategory('ekonomi')">💰 Ekonomi</button>
-      <button onclick="selectCategory('utveckling')">🚀 Personlig utveckling</button>
-    </div>
-    <div class="chat">
-      <textarea id="input" placeholder="Skriv här vad du vill ha hjälp med…"></textarea>
-      <button onclick="send()">Få vägledning</button>
-    </div>
+  <div class="categories">
+    <button onclick="selectCategory('stress')">😔 Stress</button>
+    <button onclick="selectCategory('relation')">❤️ Relation</button>
+    <button onclick="selectCategory('energi')">⚡ Energi</button>
+    <button onclick="selectCategory('självkänsla')">🌱 Självkänsla</button>
+    <button onclick="selectCategory('ekonomi')">💰 Ekonomi</button>
+    <button onclick="selectCategory('utveckling')">🚀 Personlig utveckling</button>
+  </div>
 
-    <div class="nav">
-      <button onclick="enableReminders()">🔔 Aktivera påminnelser</button>
-      <button onclick="scheduleDaily()">⏰ Daglig påminnelse</button>
-    </div>
+  <!-- ÖVNINGSKORT -->
+  <div id="exercise-card" class="card hidden">
+    <h3 id="card-title"></h3>
+    <p id="card-text"></p>
+    <button id="next-btn">Nästa övning</button>
+  </div>
 
-  </div> <!-- STÄNGER .app -->
+  <!-- PÅMINNELSER -->
+  <div class="nav">
+    <button onclick="enableReminders()">🔔 Aktivera påminnelser</button>
+    <button onclick="scheduleDaily()">⏰ Daglig påminnelse</button>
+  </div>
+
+</div>
 
 <script src="app.js"></script>
 </body>

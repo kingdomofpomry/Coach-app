@@ -1,4 +1,3 @@
-/* RESET */
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -6,12 +5,11 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: system-ui, sans-serif;
   background: linear-gradient(135deg, #0b1020, #1b2450);
   color: white;
 }
 
-/* APP */
 .app {
   min-height: 100vh;
   padding: 24px;
@@ -20,92 +18,68 @@ body {
   align-items: center;
 }
 
-/* LOGO */
 .logo {
   width: 180px;
   margin-bottom: 16px;
 }
 
-/* TITLES */
 h1 {
   margin: 8px 0;
   font-size: 28px;
-  text-align: center;
 }
 
 .subtitle {
   opacity: 0.85;
-  text-align: center;
   margin-bottom: 20px;
 }
 
-/* LANGUAGE */
 .language {
   display: flex;
   gap: 12px;
   margin-bottom: 24px;
 }
 
-.language button {
-  padding: 10px 16px;
-  border-radius: 999px;
+.language button,
+.categories button,
+.card button,
+.nav button {
+  padding: 14px 18px;
+  border-radius: 16px;
   border: none;
   background: rgba(255,255,255,0.15);
   color: white;
-  font-size: 14px;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-/* CATEGORIES */
 .categories {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
-  width: 100%;
   max-width: 420px;
+  width: 100%;
   margin-bottom: 24px;
 }
 
-.categories button {
-  padding: 16px;
-  border-radius: 18px;
-  border: none;
-  background: rgba(255,255,255,0.12);
-  color: white;
-  font-size: 16px;
-}
-
-/* CHAT */
-.chat {
+.card {
   width: 100%;
   max-width: 420px;
-  margin-top: 24px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 24px;
 }
 
-.chat textarea {
-  width: 100%;
-  min-height: 90px;
-  padding: 14px;
-  border-radius: 16px;
-  border: none;
-  resize: none;
-  font-size: 15px;
+.card h3 {
+  margin-top: 0;
 }
 
-.chat button {
+.hidden {
+  display: none;
+}
+
+.nav {
+  display: flex;
+  gap: 12px;
   margin-top: 12px;
-  width: 100%;
-  padding: 14px;
-  border-radius: 16px;
-  border: none;
-  background: #3b82f6;
-  color: white;
-  font-size: 16px;
-}
-
-/* BUTTONS – VIKTIGAST */
-button,
-textarea,
-input {
-  pointer-events: auto;
-  cursor: pointer;
 }

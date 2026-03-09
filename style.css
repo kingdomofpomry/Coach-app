@@ -83,3 +83,14 @@ h1 {
   gap: 12px;
   margin-top: 12px;
 }
+.chat {
+  position: relative;
+  z-index: 1;
+}
+
+.categories button,
+.language button,
+.nav button {
+  position: relative;
+  z-index: 2;
+}

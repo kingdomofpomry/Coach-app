@@ -94,3 +94,8 @@ h1 {
   position: relative;
   z-index: 2;
 }
+#progress{
+margin-bottom:12px;
+font-size:14px;
+opacity:0.7;
+}

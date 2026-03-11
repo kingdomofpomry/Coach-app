@@ -78,7 +78,11 @@ const step=exercises[currentCategory][currentStep];
 title.textContent=step.title;
 text.textContent=step.text;
 
+progress.textContent = (currentStep + 1) + " / " + exercises[currentCategory].length;
+
 card.classList.remove("hidden");
+
+}
 
 }
 

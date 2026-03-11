@@ -81,7 +81,8 @@ text.textContent=step.text;
 progress.textContent = (currentStep + 1) + " / " + exercises[currentCategory].length;
 
 card.classList.remove("hidden");
-
+localStorage.setItem("coachCategory", currentCategory);
+localStorage.setItem("coachStep", currentStep);
 }
 
 }

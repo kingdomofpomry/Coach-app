@@ -155,3 +155,14 @@ document.getElementById("lang-en")?.addEventListener("click",()=>{
 alert("English coming soon");
 
 });
+const savedCategory = localStorage.getItem("coachCategory");
+const savedStep = localStorage.getItem("coachStep");
+
+if(savedCategory){
+
+currentCategory = savedCategory;
+currentStep = parseInt(savedStep) || 0;
+
+showExercise();
+
+}

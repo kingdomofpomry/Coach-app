@@ -55,7 +55,7 @@ const card=document.getElementById("exercise-card");
 const title=document.getElementById("card-title");
 const text=document.getElementById("card-text");
 const nextBtn=document.getElementById("next-btn");
-
+const progress=document.getElementById("progress");
 
 /* VÄLJ KATEGORI */
 

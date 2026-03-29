@@ -1,3 +1,4 @@
+const previousAnswer = document.getElementById("previous-answer");
 console.log("app.js laddad");
 
 /* ÖVNINGAR */

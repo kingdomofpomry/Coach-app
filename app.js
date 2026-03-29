@@ -95,7 +95,7 @@ todayPlan.classList.remove("hidden");
   
 localStorage.setItem("coachCategory", currentCategory);
 localStorage.setItem("coachStep", currentStep);
-}
+
 const key = currentCategory + "_step_" + currentStep;
 const saved = localStorage.getItem(key);
 

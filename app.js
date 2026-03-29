@@ -196,8 +196,24 @@ if(!text) return;
 const key = currentCategory + "_step_" + currentStep;
 localStorage.setItem(key, text);
 
-input.value = "";
+// 🔥 AI SIMULERING
+let aiReply = "";
 
-alert("Svar sparat ✅");
+if(currentCategory === "stress"){
+  aiReply = "Det låter som att du bär på mycket just nu. Vad skulle hända om du sänkte tempot lite idag?";
+}
+else if(currentCategory === "relation"){
+  aiReply = "Intressant reflektion. Vad behöver du uttrycka som du kanske håller inne?";
+}
+else if(currentCategory === "energi"){
+  aiReply = "Bra att du uppmärksammar din energi. Vad ger dig energi – och vad tar den?";
+}
+else{
+  aiReply = "Stark reflektion. Vad blir ditt nästa lilla steg framåt?";
+}
+
+alert("Svar sparat ✅\n\nAI Coach:\n" + aiReply);
+
+input.value = "";
 
 }

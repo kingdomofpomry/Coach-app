@@ -82,6 +82,16 @@ text.textContent=step.text;
 progress.textContent = (currentStep + 1) + " / " + exercises[currentCategory].length;
 
 card.classList.remove("hidden");
+  todayPlan.textContent =
+"Din plan idag: " +
+currentCategory +
+" – steg " +
+(currentStep + 1) +
+"/" +
+exercises[currentCategory].length;
+
+todayPlan.classList.remove("hidden");
+  
 localStorage.setItem("coachCategory", currentCategory);
 localStorage.setItem("coachStep", currentStep);
 }

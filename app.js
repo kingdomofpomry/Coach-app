@@ -96,8 +96,6 @@ localStorage.setItem("coachCategory", currentCategory);
 localStorage.setItem("coachStep", currentStep);
 }
 
-}
-
 
 /* NÄSTA */
 

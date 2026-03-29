@@ -175,3 +175,19 @@ currentStep = parseInt(savedStep) || 0;
 showExercise();
 
 }
+function send(){
+
+const input = document.getElementById("input");
+const text = input.value.trim();
+
+if(!text) return;
+
+// spara svar
+const key = currentCategory + "_step_" + currentStep;
+localStorage.setItem(key, text);
+
+input.value = "";
+
+alert("Svar sparat ✅");
+
+}

@@ -185,7 +185,21 @@ currentStep = parseInt(savedStep) || 0;
 showExercise();
 
 }
-function send(){
+
+}
+else if(currentCategory === "energi"){
+  aiReply = "Bra att du uppmärksammar din energi. Vad ger dig energi – och vad tar den?";
+}
+else{
+  aiReply = "Stark reflektion. Vad blir ditt nästa lilla steg framåt?";
+}
+
+alert("Svar sparat ✅\n\nAI Coach:\n" + aiReply);
+
+input.value = "";
+
+}
+async function send(){
 
 const input = document.getElementById("input");
 const text = input.value.trim();
@@ -196,23 +210,23 @@ if(!text) return;
 const key = currentCategory + "_step_" + currentStep;
 localStorage.setItem(key, text);
 
-// 🔥 AI SIMULERING
-let aiReply = "";
+try{
 
-if(currentCategory === "stress"){
-  aiReply = "Det låter som att du bär på mycket just nu. Vad skulle hända om du sänkte tempot lite idag?";
-}
-else if(currentCategory === "relation"){
-  aiReply = "Intressant reflektion. Vad behöver du uttrycka som du kanske håller inne?";
-}
-else if(currentCategory === "energi"){
-  aiReply = "Bra att du uppmärksammar din energi. Vad ger dig energi – och vad tar den?";
-}
-else{
-  aiReply = "Stark reflektion. Vad blir ditt nästa lilla steg framåt?";
-}
+const res = await fetch("/.netlify/functions/ai", {
+  method: "POST",
+  body: JSON.stringify({
+    message: text,
+    category: currentCategory
+  })
+});
 
-alert("Svar sparat ✅\n\nAI Coach:\n" + aiReply);
+const data = await res.json();
+
+alert("AI Coach:\n\n" + data.reply);
+
+}catch(err){
+  alert("AI funkar inte just nu");
+}
 
 input.value = "";
 

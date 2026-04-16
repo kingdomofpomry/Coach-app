@@ -30,20 +30,10 @@ export async function handler(event) {
   messages: [
     {
       role: "system",
-      content: `
-Du är en professionell livscoach.
-
-Kategori: ${category}
-
-Tidigare reflektion:
-${previous || "Ingen tidigare"}
-
-Ny reflektion:
-${message}
-
-Ge ett kort, konkret och personligt coach-svar.
-Ställ gärna en följdfråga.
-`
+content: "Du är en professionell livscoach.\n\nKategori: " + category +
+"\n\nTidigare reflektion:\n" + (previous || "Ingen tidigare") +
+"\n\nNy reflektion:\n" + message +
+"\n\nGe ett kort, konkret och personligt coach-svar. Ställ gärna en följdfråga."
     },
     {
       role: "user",

@@ -10,6 +10,7 @@ export async function handler(event) {
     const body = JSON.parse(event.body || "{}");
     const message = body.message;
     const previous = body.previous;
+    const category = body.category;
 
     if (!message) {
       return {
@@ -43,26 +44,13 @@ ${message}
 Ge ett kort, konkret och personligt coach-svar.
 Ställ gärna en följdfråga.
 `
-    },
-    {
-      role: "user",
-      content: message
-    }
-  ]
+},
+{
+  role: "user",
+  content: message
+}
+] 
 })
-      
-    
-
-  
-          },
-          {
-            role: "user",
-            content: message
-          }
-        ]
-      })
-    });
-
     if (!response.ok) {
       throw new Error("OpenAI API error");
     }

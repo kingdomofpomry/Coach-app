@@ -211,10 +211,8 @@ const key = currentCategory + "_step_" + currentStep;
 localStorage.setItem(key, text);
 
 try{
-
-const res = await fetch("/.netlify/functions/ai", {
-  method: "POST",
- const prevKey = currentCategory + "_step_" + currentStep;
+  
+const prevKey = currentCategory + "_step_" + currentStep;
 const previous = localStorage.getItem(prevKey);
 
 const res = await fetch("/.netlify/functions/ai", {
@@ -223,8 +221,6 @@ const res = await fetch("/.netlify/functions/ai", {
     message: text,
     category: currentCategory,
     previous: previous
-  })
-});
   })
 });
 

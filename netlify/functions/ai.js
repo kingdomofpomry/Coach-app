@@ -9,6 +9,7 @@ export async function handler(event) {
   try {
     const body = JSON.parse(event.body || "{}");
     const message = body.message;
+    const previous = body.previous;
 
     if (!message) {
       return {

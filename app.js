@@ -214,9 +214,17 @@ try{
 
 const res = await fetch("/.netlify/functions/ai", {
   method: "POST",
+ const prevKey = currentCategory + "_step_" + currentStep;
+const previous = localStorage.getItem(prevKey);
+
+const res = await fetch("/.netlify/functions/ai", {
+  method: "POST",
   body: JSON.stringify({
     message: text,
-    category: currentCategory
+    category: currentCategory,
+    previous: previous
+  })
+});
   })
 });
 

@@ -100,7 +100,7 @@ window.send = async function() {
     });
 
     const data = await res.json();
-    aiResponse.innerText = data.reply;
+    aiResponse.innerText = data.reply || JSON.stringify(data);
   } catch (err) {
     aiResponse.innerText = "Något gick fel.";
   }

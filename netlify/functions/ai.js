@@ -71,7 +71,7 @@ Ge ett kort, konkret och personligt coach-svar. Ställ gärna en följdfråga.`
       data.choices &&
       data.choices[0] &&
       data.choices[0].message &&
-      data.choices[0].message.content
+      data.output[0].content[0].text
     ) {
       reply = data.choices[0].message.content;
     }

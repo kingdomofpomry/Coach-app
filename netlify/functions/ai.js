@@ -8,14 +8,17 @@ export async function handler(event) {
 
   try {
     const body = JSON.parse(event.body || "{}");
+
     const message = body.message;
     const previous = body.previous;
     const category = body.category;
 
     if (!message) {
       return {
-        statusCode: 400,
-        body: JSON.stringify({ reply: "Jag hörde inget. Skriv gärna igen 🌱" })
+        statusCode: 200,
+        body: JSON.stringify({
+          reply: "Jag hörde inget – skriv gärna något 💭"
+        })
       };
     }
 
@@ -25,30 +28,43 @@ export async function handler(event) {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
       },
-  body: JSON.stringify({
-  model: "gpt-4o-mini",
-  messages: [
-    {
-      role: "system",
-content: "Du är en professionell livscoach.\n\nKategori: " + category +
-"\n\nTidigare reflektion:\n" + (previous || "Ingen tidigare") +
-"\n\nNy reflektion:\n" + message +
-"\n\nGe ett kort, konkret och personligt coach-svar. Ställ gärna en följdfråga."
-    },
-    {
-      role: "user",
-      content: message
-    }
-  ]
-})
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content:
+              "Du är en professionell livscoach.\n\n" +
+              "Kategori: " + category +
+              "\n\nTidigare reflektion:\n" + (previous || "Ingen tidigare") +
+              "\n\nNy reflektion:\n" + message +
+              "\n\nGe ett kort, konkret och personligt coach-svar. Ställ gärna en följdfråga."
+          },
+          {
+            role: "user",
+            content: message
+          }
+        ]
+      })
+    });
+
     if (!response.ok) {
       throw new Error("OpenAI API error");
     }
 
     const data = await response.json();
-    const reply =
-      data?.choices?.[0]?.message?.content ||
-      "Jag är här med dig 🌱 Vill du berätta lite mer?";
+
+    let reply = "Jag är här med dig 🌱 Vill du berätta lite mer?";
+
+    if (
+      data &&
+      data.choices &&
+      data.choices[0] &&
+      data.choices[0].message &&
+      data.choices[0].message.content
+    ) {
+      reply = data.choices[0].message.content;
+    }
 
     return {
       statusCode: 200,
@@ -60,8 +76,7 @@ content: "Du är en professionell livscoach.\n\nKategori: " + category +
       statusCode: 200,
       body: JSON.stringify({
         reply:
-          "Det verkar vara lite tekniskt strul just nu 🌧️ " +
-          "Ta ett djupt andetag och prova igen om en stund."
+          "Jag är här med dig 🌱 Det blev lite tyst från min sida – vill du prova igen?"
       })
     };
   }

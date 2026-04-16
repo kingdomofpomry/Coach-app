@@ -1,14 +1,13 @@
-export async function handler(event) {
+exports.handler = async function (event) {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
-      body: JSON.stringify({ error: "Method not allowed" })
+      body: JSON.stringify({ error: "Method not allowed" }),
     };
   }
 
   try {
     const body = JSON.parse(event.body || "{}");
-
     const message = body.message;
     const previous = body.previous;
     const category = body.category;

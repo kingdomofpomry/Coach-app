@@ -21,17 +21,27 @@ export async function handler(event) {
         })
       };
     }
+const response = await fetch("https://api.openai.com/v1/responses", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+  },
+  body: JSON.stringify({
+    model: "gpt-4o-mini",
+    input: `Du är en professionell livscoach.
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          {
+Kategori: ${category}
+
+Tidigare reflektion:
+${previous || "Ingen tidigare"}
+
+Ny reflektion:
+${message}
+
+Ge ett kort, konkret och personligt coach-svar. Ställ gärna en följdfråga.`
+  })
+});
             role: "system",
             content:
               "Du är en professionell livscoach.\n\n" +

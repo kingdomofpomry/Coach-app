@@ -25,7 +25,7 @@ export async function handler(event) {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
       },
-      body: JSON.stringify({
+  body: JSON.stringify({
   model: "gpt-4o-mini",
   messages: [
     {
@@ -44,12 +44,12 @@ ${message}
 Ge ett kort, konkret och personligt coach-svar.
 Ställ gärna en följdfråga.
 `
-},
-{
-  role: "user",
-  content: message
-}
-] 
+    },
+    {
+      role: "user",
+      content: message
+    }
+  ]
 })
     if (!response.ok) {
       throw new Error("OpenAI API error");

@@ -8,6 +8,7 @@ exports.handler = async function (event) {
 
   try {
     const body = JSON.parse(event.body || "{}");
+
     const message = body.message;
     const previous = body.previous;
     const category = body.category;
@@ -16,77 +17,59 @@ exports.handler = async function (event) {
       return {
         statusCode: 200,
         body: JSON.stringify({
-          reply: "Jag hörde inget – skriv gärna något 💭"
-        })
+          reply: "Jag hörde inget – skriv gärna något 💬",
+        }),
       };
     }
-const response = await fetch("https://api.openai.com/v1/responses", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
-  },
-  body: JSON.stringify({
-    model: "gpt-4o-mini",
-    input: `Du är en professionell livscoach.
 
-Kategori: ${category}
-
-Tidigare reflektion:
-${previous || "Ingen tidigare"}
-
-Ny reflektion:
-${message}
-
-Ge ett kort, konkret och personligt coach-svar. Ställ gärna en följdfråga.`
-  })
-});
-            role: "system",
-            content:
-              "Du är en professionell livscoach.\n\n" +
-              "Kategori: " + category +
-              "\n\nTidigare reflektion:\n" + (previous || "Ingen tidigare") +
-              "\n\nNy reflektion:\n" + message +
-              "\n\nGe ett kort, konkret och personligt coach-svar. Ställ gärna en följdfråga."
-          },
-          {
-            role: "user",
-            content: message
-          }
-        ]
-      })
-    });
+    const response = await fetch(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-4o-mini",
+          messages: [
+            {
+              role: "system",
+              content:
+                "Du är en professionell livscoach. Ge korta, konkreta och personliga svar. Ställ gärna en följdfråga.",
+            },
+            {
+              role: "user",
+              content: `Kategori: ${category}
+Tidigare reflektion: ${previous || "Ingen tidigare"}
+Ny reflektion: ${message}`,
+            },
+          ],
+        }),
+      }
+    );
 
     if (!response.ok) {
-      throw new Error("OpenAI API error");
+      throw new Error("API error");
     }
 
     const data = await response.json();
 
-    let reply = "Jag är här med dig 🌱 Vill du berätta lite mer?";
-
-    if (
-      data &&
-      data.choices &&
-      data.choices[0] &&
-      data.choices[0].message &&
-      data.output[0].content[0].text
-    ) {
-      reply = data.choices[0].message.content;
-    }
+    const reply =
+      data?.choices?.[0]?.message?.content ||
+      "Jag är här med dig 🌱 Vill du prova igen?";
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ reply })
+      body: JSON.stringify({ reply }),
     };
-
   } catch (error) {
     return {
       statusCode: 200,
       body: JSON.stringify({
         reply:
-          "Jag är här med dig 🌱 Det blev lite tyst från min sida – vill du prova igen?"
-      })
+          "Jag är här med dig 🌱 Det blev lite tyst från min sida – vill du prova igen?",
+      }),
     };
   }
-}
+};

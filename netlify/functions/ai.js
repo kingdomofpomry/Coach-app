@@ -25,14 +25,35 @@ export async function handler(event) {
         "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          {
-            role: "system",
-            content:
-              "Du är en trygg, lugn och varm AI-coach. " +
-              "Du ger reflektion, stöd och enkla råd. " +
-              "Ingen medicinsk, juridisk eller professionell rådgivning."
+  model: "gpt-4o-mini",
+  messages: [
+    {
+      role: "system",
+      content: `
+Du är en professionell livscoach.
+
+Kategori: ${category}
+
+Tidigare reflektion:
+${previous || "Ingen tidigare"}
+
+Ny reflektion:
+${message}
+
+Ge ett kort, konkret och personligt coach-svar.
+Ställ gärna en följdfråga.
+`
+    },
+    {
+      role: "user",
+      content: message
+    }
+  ]
+})
+      
+    
+
+  
           },
           {
             role: "user",

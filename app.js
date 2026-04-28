@@ -215,20 +215,46 @@ window.send = async function () {
       ? "Något gick fel."
       : "Something went wrong.";
   }
-};
-updateCategoryButtons();
-setLanguage(currentLanguage);
-function enableReminders() {
-  alert(currentLanguage === "sv"
-    ? "Påminnelser aktiverade (demo)"
-    : "Reminders activated (demo)");
+};function enableReminders() {
+  alert(
+    currentLanguage === "sv"
+      ? "Påminnelser är aktiva så länge appen är öppen"
+      : "Reminders are active while the app is open"
+  );
 }
 
 function scheduleDaily() {
-  alert(currentLanguage === "sv"
-    ? "Daglig påminnelse inställd (demo)"
-    : "Daily reminder set (demo)");
+  const time = prompt(
+    currentLanguage === "sv"
+      ? "Vilken tid vill du ha påminnelse? (HH:MM)"
+      : "What time do you want a reminder? (HH:MM)"
+  );
+
+  if (!time) return;
+
+  localStorage.setItem("reminderTime", time);
+
+  alert(
+    currentLanguage === "sv"
+      ? "Påminnelse sparad!"
+      : "Reminder saved!"
+  );
 }
 updateCategoryButtons();
 updateUIText();
 setLanguage(currentLanguage);
+setInterval(() => {
+  const saved = localStorage.getItem("reminderTime");
+  if (!saved) return;
+
+  const now = new Date();
+  const current = now.toTimeString().slice(0, 5);
+
+  if (current === saved) {
+    alert(
+      currentLanguage === "sv"
+        ? "Dags för din dagliga check-in 💡"
+        : "Time for your daily check-in 💡"
+    );
+  }
+}, 60000);

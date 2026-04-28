@@ -52,34 +52,7 @@ const exercises = {
 };
 
 // ===== FUNKTIONER =====
-window.selectCategory = function(category) {
-  currentCategory = category;
-  currentIndex = 0;
-  showCard();
-};
-
-function showCard() {
-  const item = exercises[currentCategory][currentIndex];
-
-  card.classList.remove("hidden");
-  titleEl.innerText = item.title;
-  textEl.innerText = item.text;
-  progressEl.innerText = `${currentIndex + 1} / ${exercises[currentCategory].length}`;
-}
-
-document.getElementById("next-btn").addEventListener("click", () => {
-  if (!currentCategory) return;
-
-  currentIndex++;
-  if (currentIndex >= exercises[currentCategory].length) {
-    currentIndex = 0;
-  }
-
-  showCard();
-});
-
-// ===== AI CALL =====
-window.send = async function() {
+window.send = async function () {
   const message = inputEl.value;
 
   if (!message) return;
@@ -95,12 +68,18 @@ window.send = async function() {
       },
       body: JSON.stringify({
         message,
-        category: currentCategory
+        category: currentCategory,
+        language: currentLanguage || "sv"
       })
     });
 
     const data = await res.json();
-    aiResponse.innerText = data.reply || JSON.stringify(data);
+
+    aiResponse.innerText = data.reply;
+
+    // 🔥 rensa input efter svar
+    inputEl.value = "";
+
   } catch (err) {
     aiResponse.innerText = "Något gick fel.";
   }

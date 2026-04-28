@@ -184,7 +184,8 @@ function nextExercise() {
 // ===== AI =====
 window.send = async function () {
   const message = inputEl.value;
-
+saveAnswer(message);
+  
   if (!message) return;
 
   aiResponse.classList.remove("hidden");
@@ -260,3 +261,47 @@ setInterval(() => {
     );
   }
 }, 60000);
+// ===== SAVE USER ANSWER =====
+function saveAnswer(text) {
+  const today = new Date().toISOString().split("T")[0];
+
+  const data = JSON.parse(localStorage.getItem("answers") || "{}");
+
+  data[today] = text;
+
+  localStorage.setItem("answers", JSON.stringify(data));
+}
+
+
+// ===== GET LAST ANSWER =====
+function getLastAnswer() {
+  const data = JSON.parse(localStorage.getItem("answers") || "{}");
+
+  const dates = Object.keys(data).sort().reverse();
+
+  return dates.length ? data[dates[0]] : null;
+}
+
+
+// ===== STREAK SYSTEM =====
+function getStreak() {
+  const data = JSON.parse(localStorage.getItem("answers") || "{}");
+
+  let streak = 0;
+  let date = new Date();
+
+  while (true) {
+    const key = date.toISOString().split("T")[0];
+
+    if (data[key]) {
+      streak++;
+      date.setDate(date.getDate() - 1);
+    } else {
+      break;
+    }
+  }
+
+  return streak;
+}
+console.log("Last answer:", getLastAnswer());
+console.log("Streak:", getStreak());

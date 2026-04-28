@@ -13,74 +13,127 @@ let currentCategory = null;
 let currentIndex = 0;
 let currentLanguage = "sv";
 
+// ===== LANGUAGE SWITCH =====
+function setLanguage(lang) {
+  currentLanguage = lang;
+
+  if (currentCategory) {
+    showCard();
+  }
+}
+
 // ===== DATA =====
 const exercises = {
-  stress: [
-    { title: "Reflektion", text: "Vad är den största källan till stress i ditt liv just nu?" },
-    { title: "Handling", text: "Skriv ner EN sak du kan göra idag för att minska stress." },
-    { title: "Tankemönster", text: "Vilken tanke gör stressen värre – och hur kan du tänka annorlunda?" }
-  ],
+  stress: {
+    sv: [
+      { title: "Reflektion", text: "Vad är den största källan till stress i ditt liv just nu?" },
+      { title: "Handling", text: "Skriv ner EN sak du kan göra idag för att minska stress." },
+      { title: "Tankemönster", text: "Vilken tanke gör stressen värre – och hur kan du tänka annorlunda?" }
+    ],
+    en: [
+      { title: "Reflection", text: "What is the biggest source of stress in your life right now?" },
+      { title: "Action", text: "Write down ONE thing you can do today to reduce stress." },
+      { title: "Mindset", text: "Which thought makes your stress worse – and how can you reframe it?" }
+    ]
+  },
 
-  relation: [
-    { title: "Reflektion", text: "Vilken relation påverkar dig mest just nu?" },
-    { title: "Handling", text: "Finns det ett samtal du behöver ta?" },
-    { title: "Tankemönster", text: "Vilken roll tar du i relationer?" }
-  ],
+  relation: {
+    sv: [
+      { title: "Reflektion", text: "Vilken relation påverkar dig mest just nu?" },
+      { title: "Handling", text: "Finns det ett samtal du behöver ta?" },
+      { title: "Tankemönster", text: "Vilken roll tar du i relationer?" }
+    ],
+    en: [
+      { title: "Reflection", text: "Which relationship affects you the most right now?" },
+      { title: "Action", text: "Is there a conversation you need to have?" },
+      { title: "Mindset", text: "What role do you take in relationships?" }
+    ]
+  },
 
-  energi: [
-    { title: "Reflektion", text: "När på dagen känner du mest energi?" },
-    { title: "Handling", text: "Vad är en liten sak som ger dig mer energi?" },
-    { title: "Tankemönster", text: "Vad säger du till dig själv när du är trött?" }
-  ],
+  energi: {
+    sv: [
+      { title: "Reflektion", text: "När på dagen känner du mest energi?" },
+      { title: "Handling", text: "Vad är en liten sak som ger dig mer energi?" },
+      { title: "Tankemönster", text: "Vad säger du till dig själv när du är trött?" }
+    ],
+    en: [
+      { title: "Reflection", text: "When during the day do you feel the most energy?" },
+      { title: "Action", text: "What is one small thing that gives you more energy?" },
+      { title: "Mindset", text: "What do you tell yourself when you're tired?" }
+    ]
+  },
 
-  självkänsla: [
-    { title: "Reflektion", text: "När tvivlar du mest på dig själv?" },
-    { title: "Handling", text: "Skriv ner en sak du gjorde bra nyligen." },
-    { title: "Tankemönster", text: "Hur skulle du prata med en vän i samma situation?" }
-  ],
+  självkänsla: {
+    sv: [
+      { title: "Reflektion", text: "När tvivlar du mest på dig själv?" },
+      { title: "Handling", text: "Skriv ner en sak du gjorde bra nyligen." },
+      { title: "Tankemönster", text: "Hur skulle du prata med en vän i samma situation?" }
+    ],
+    en: [
+      { title: "Reflection", text: "When do you doubt yourself the most?" },
+      { title: "Action", text: "Write down one thing you did well recently." },
+      { title: "Mindset", text: "How would you speak to a friend in your situation?" }
+    ]
+  },
 
-  ekonomi: [
-    { title: "Reflektion", text: "Vad i din ekonomi skapar mest oro?" },
-    { title: "Handling", text: "Vilken liten ekonomisk handling kan du ta idag?" },
-    { title: "Tankemönster", text: "Vilken tanke begränsar din ekonomiska utveckling?" }
-  ],
+  ekonomi: {
+    sv: [
+      { title: "Reflektion", text: "Vad i din ekonomi skapar mest oro?" },
+      { title: "Handling", text: "Vilken liten ekonomisk handling kan du ta idag?" },
+      { title: "Tankemönster", text: "Vilken tanke begränsar din ekonomiska utveckling?" }
+    ],
+    en: [
+      { title: "Reflection", text: "What in your finances creates the most stress?" },
+      { title: "Action", text: "What small financial action can you take today?" },
+      { title: "Mindset", text: "What thought limits your financial growth?" }
+    ]
+  },
 
-  utveckling: [
-    { title: "Reflektion", text: "Vad vill du egentligen växa inom just nu?" },
-    { title: "Handling", text: "Vilket litet steg kan du ta idag?" },
-    { title: "Tankemönster", text: "Vad håller dig tillbaka mentalt?" }
-  ]
+  utveckling: {
+    sv: [
+      { title: "Reflektion", text: "Vad vill du egentligen växa inom just nu?" },
+      { title: "Handling", text: "Vilket litet steg kan du ta idag?" },
+      { title: "Tankemönster", text: "Vad håller dig tillbaka mentalt?" }
+    ],
+    en: [
+      { title: "Reflection", text: "What do you really want to grow in right now?" },
+      { title: "Action", text: "What small step can you take today?" },
+      { title: "Mindset", text: "What is holding you back mentally?" }
+    ]
+  }
 };
 
-// ===== VISA KORT =====
+// ===== SHOW CARD =====
 function showCard() {
   if (!currentCategory) return;
 
-  const list = exercises[currentCategory];
+  const list = exercises[currentCategory][currentLanguage];
   const current = list[currentIndex];
 
   titleEl.innerText = current.title;
   textEl.innerText = current.text;
   progressEl.innerText = `${currentIndex + 1} / ${list.length}`;
 
-  // 🔥 reset varje gång
   inputEl.value = "";
   aiResponse.innerText = "";
   aiResponse.classList.add("hidden");
 }
 
-// ===== VÄLJ KATEGORI =====
+// ===== SELECT CATEGORY =====
 function selectCategory(cat) {
   currentCategory = cat;
   currentIndex = 0;
+
+  document.getElementById("exercise-card").classList.remove("hidden");
+
   showCard();
 }
 
-// ===== NÄSTA ÖVNING =====
+// ===== NEXT =====
 function nextExercise() {
   if (!currentCategory) return;
 
-  const list = exercises[currentCategory];
+  const list = exercises[currentCategory][currentLanguage];
 
   currentIndex++;
 
@@ -91,14 +144,14 @@ function nextExercise() {
   showCard();
 }
 
-// ===== AI CALL =====
+// ===== AI =====
 window.send = async function () {
   const message = inputEl.value;
 
   if (!message) return;
 
   aiResponse.classList.remove("hidden");
-  aiResponse.innerText = "Tänker...";
+  aiResponse.innerText = currentLanguage === "sv" ? "Tänker..." : "Thinking...";
 
   try {
     const res = await fetch("/.netlify/functions/ai", {
@@ -115,13 +168,14 @@ window.send = async function () {
 
     const data = await res.json();
 
-    aiResponse.innerText = data.reply || "Inget svar.";
+    aiResponse.innerText = data.reply || (currentLanguage === "sv" ? "Inget svar." : "No response.");
 
-    // 🔥 rensa input efter svar
     inputEl.value = "";
 
   } catch (err) {
     console.error(err);
-    aiResponse.innerText = "Något gick fel.";
+    aiResponse.innerText = currentLanguage === "sv"
+      ? "Något gick fel."
+      : "Something went wrong.";
   }
 };

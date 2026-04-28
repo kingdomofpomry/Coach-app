@@ -24,11 +24,22 @@ function setLanguage(lang) {
     showCard();
   }
 }
-  // 🔥 spara valet
-  localStorage.setItem("lang", lang);
 
-  if (currentCategory) {
-    showCard();
+function updateCategoryButtons() {
+  if (currentLanguage === "sv") {
+    document.getElementById("cat-stress").innerText = "😔 Stress";
+    document.getElementById("cat-relation").innerText = "❤️ Relation";
+    document.getElementById("cat-energi").innerText = "⚡ Energi";
+    document.getElementById("cat-sjalv").innerText = "🌱 Självkänsla";
+    document.getElementById("cat-ekonomi").innerText = "💰 Ekonomi";
+    document.getElementById("cat-utveckling").innerText = "🚀 Personlig utveckling";
+  } else {
+    document.getElementById("cat-stress").innerText = "😔 Stress";
+    document.getElementById("cat-relation").innerText = "❤️ Relationship";
+    document.getElementById("cat-energi").innerText = "⚡ Energy";
+    document.getElementById("cat-sjalv").innerText = "🌱 Self-esteem";
+    document.getElementById("cat-ekonomi").innerText = "💰 Finance";
+    document.getElementById("cat-utveckling").innerText = "🚀 Personal growth";
   }
 }
 

@@ -11,36 +11,40 @@ exports.handler = async function (event) {
 
     const message = body.message;
     const category = body.category || "general";
-    const previous = body.previous || "";
+    const language = body.language || "sv";
 
     if (!message) {
       return {
         statusCode: 200,
         body: JSON.stringify({
-          reply: "Skriv något först 💬"
+          reply: language === "en"
+            ? "Write something first 💬"
+            : "Skriv något först 💬"
         })
       };
     }
+
+    const systemPrompt =
+      language === "en"
+        ? "You are a high-performance coach. Give short, sharp, practical insights that improve thinking, focus and decision-making."
+        : "Du är en high-performance coach. Ge korta, konkreta och kraftfulla insikter som förbättrar fokus, tänkande och beslut.";
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
         messages: [
           {
             role: "system",
-            content:
-              "Du är en professionell livscoach. Ge korta, konkreta och personliga svar som hjälper användaren framåt."
+            content: systemPrompt
           },
           {
             role: "user",
-            content: `Kategori: ${category}
-Tidigare: ${previous}
-Ny reflektion: ${message}`
+            content: `Kategori: ${category}\nSvar: ${message}`
           }
         ]
       })
@@ -48,9 +52,17 @@ Ny reflektion: ${message}`
 
     const data = await response.json();
 
-    const reply =
-      data?.choices?.[0]?.message?.content ||
-      "Jag hörde dig 🌱 vill du utveckla lite mer?";
+    // 🔥 visa fel direkt istället för fake svar
+    if (!data.choices) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          reply: "API ERROR: " + JSON.stringify(data)
+        })
+      };
+    }
+
+    const reply = data.choices[0].message.content;
 
     return {
       statusCode: 200,
@@ -60,7 +72,7 @@ Ny reflektion: ${message}`
     return {
       statusCode: 200,
       body: JSON.stringify({
-        reply: "Något gick fel – prova igen."
+        reply: "Server error – prova igen."
       })
     };
   }

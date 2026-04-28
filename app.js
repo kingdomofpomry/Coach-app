@@ -84,3 +84,20 @@ window.send = async function () {
     aiResponse.innerText = "Något gick fel.";
   }
 };
+function nextExercise() {
+  currentIndex++;
+
+  // stoppa vid max (3 frågor)
+  if (currentIndex > 2) currentIndex = 2;
+
+  const current = exercises[currentCategory][currentIndex];
+
+  titleEl.innerText = current.title;
+  textEl.innerText = current.text;
+  progressEl.innerText = `${currentIndex + 1} / 3`;
+
+  // 🔥 Rensa allt
+  inputEl.value = "";
+  aiResponse.innerText = "";
+  aiResponse.classList.add("hidden");
+}

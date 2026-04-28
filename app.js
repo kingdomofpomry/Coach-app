@@ -11,11 +11,14 @@ const aiResponse = document.getElementById("ai-response");
 // ===== STATE =====
 let currentCategory = null;
 let currentIndex = 0;
-let currentLanguage = "en";
+let currentLanguage = localStorage.getItem("lang") || "en";
 
 // ===== LANGUAGE SWITCH =====
 function setLanguage(lang) {
   currentLanguage = lang;
+
+  // 🔥 spara valet
+  localStorage.setItem("lang", lang);
 
   if (currentCategory) {
     showCard();

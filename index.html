@@ -2,25 +2,25 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Din Coach</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
+
 <body>
 
 <div class="app">
 
-  <img src="icon-512.png" class="logo" alt="Key of Life" />
-
   <h1>Din Coach</h1>
   <p class="subtitle">Välj område och få vägledning.</p>
-  <div id="today-plan" class="today hidden"></div>
 
+  <!-- 🌍 SPRÅK -->
   <div class="language">
-    <button id="lang-sv">🇸🇪 Svenska</button>
-    <button id="lang-en">🇬🇧 English</button>
+    <button onclick="setLanguage('sv')">🇸🇪 Svenska</button>
+    <button onclick="setLanguage('en')">🇬🇧 English</button>
   </div>
 
+  <!-- 📊 KATEGORIER -->
   <div class="categories">
     <button onclick="selectCategory('stress')">😔 Stress</button>
     <button onclick="selectCategory('relation')">❤️ Relation</button>
@@ -30,26 +30,33 @@
     <button onclick="selectCategory('utveckling')">🚀 Personlig utveckling</button>
   </div>
 
-  <!-- ÖVNINGSKORT -->
+  <!-- 🧠 ÖVNING -->
   <div id="exercise-card" class="card hidden">
+
     <h3 id="card-title"></h3>
     <div id="progress"></div>
     <p id="card-text"></p>
+
+    <textarea id="input" placeholder="Skriv din reflektion..."></textarea>
+
+    <!-- 🔥 KNAPPAR -->
+    <button onclick="send()">Få AI-reflektion</button>
     <button onclick="nextExercise()">Nästa övning</button>
-    <textarea id="input" placeholder="Skriv din reflektion här..."></textarea>
-    <button onclick="send()">Spara svar</button>
-    <div id="previous-answer" class="hidden"></div>
+
+    <!-- 🧠 AI SVAR -->
     <div id="ai-response" class="hidden"></div>
+
   </div>
 
-  <!-- PÅMINNELSER -->
+  <!-- 🔔 PÅMINNELSER -->
   <div class="nav">
     <button onclick="enableReminders()">🔔 Aktivera påminnelser</button>
     <button onclick="scheduleDaily()">⏰ Daglig påminnelse</button>
   </div>
-  
+
 </div>
+
 <script src="app.js"></script>
+
 </body>
 </html>
-

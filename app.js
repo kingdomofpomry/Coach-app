@@ -16,7 +16,14 @@ let currentLanguage = localStorage.getItem("lang") || "en";
 // ===== LANGUAGE SWITCH =====
 function setLanguage(lang) {
   currentLanguage = lang;
+  localStorage.setItem("lang", lang);
 
+  updateCategoryButtons();
+
+  if (currentCategory) {
+    showCard();
+  }
+}
   // 🔥 spara valet
   localStorage.setItem("lang", lang);
 
@@ -182,4 +189,5 @@ window.send = async function () {
       : "Something went wrong.";
   }
 };
+updateCategoryButtons();
 setLanguage(currentLanguage);

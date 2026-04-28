@@ -13,6 +13,7 @@
 <img src="icon-512.png" class="logo" />
 
   <h1>Key Clarity</h1>
+  <div id="streak"></div>
  <p class="subtitle">
 Make better decisions. Improve your finances. Take control.
 </p>
@@ -63,3 +64,11 @@ Make better decisions. Improve your finances. Take control.
 
 </body>
 </html>
+function updateStreakUI() {
+  const el = document.getElementById("streak");
+  const streak = getStreak();
+
+  el.innerText = currentLanguage === "sv"
+    ? `🔥 Streak: ${streak} dagar`
+    : `🔥 Streak: ${streak} days`;
+}

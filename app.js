@@ -240,9 +240,9 @@ function scheduleDaily() {
       : "Reminder saved!"
   );
 }
-updateCategoryButtons();
-updateUIText();
 setLanguage(currentLanguage);
+let lastTriggered = null;
+
 setInterval(() => {
   const saved = localStorage.getItem("reminderTime");
   if (!saved) return;
@@ -250,7 +250,9 @@ setInterval(() => {
   const now = new Date();
   const current = now.toTimeString().slice(0, 5);
 
-  if (current === saved) {
+  if (current === saved && lastTriggered !== current) {
+    lastTriggered = current;
+
     alert(
       currentLanguage === "sv"
         ? "Dags för din dagliga check-in 💡"

@@ -2,56 +2,96 @@
 console.log("app.js laddad");
 
 // ===== ELEMENT =====
-const card = document.getElementById("exercise-card");
 const titleEl = document.getElementById("card-title");
 const textEl = document.getElementById("card-text");
 const progressEl = document.getElementById("progress");
 const inputEl = document.getElementById("input");
 const aiResponse = document.getElementById("ai-response");
 
+// ===== STATE =====
 let currentCategory = null;
 let currentIndex = 0;
+let currentLanguage = "sv";
 
 // ===== DATA =====
 const exercises = {
   stress: [
     { title: "Reflektion", text: "Vad är den största källan till stress i ditt liv just nu?" },
-    { title: "Handling", text: "Skriv ner EN sak du kan göra idag för att minska stressen." },
+    { title: "Handling", text: "Skriv ner EN sak du kan göra idag för att minska stress." },
     { title: "Tankemönster", text: "Vilken tanke gör stressen värre – och hur kan du tänka annorlunda?" }
   ],
 
   relation: [
-    { title: "Reflektion", text: "Vilken relation upptar mest av dina tankar?" },
+    { title: "Reflektion", text: "Vilken relation påverkar dig mest just nu?" },
     { title: "Handling", text: "Finns det ett samtal du behöver ta?" },
-    { title: "Tankemönster", text: "Vilken roll tar du ofta i relationer?" }
+    { title: "Tankemönster", text: "Vilken roll tar du i relationer?" }
   ],
 
   energi: [
-    { title: "Reflektion", text: "När på dagen känner du dig mest trött?" },
-    { title: "Handling", text: "Vad är en liten sak som skulle ge dig mer energi imorgon?" },
-    { title: "Tankemönster", text: "Hur pratar du med dig själv när du är trött?" }
+    { title: "Reflektion", text: "När på dagen känner du mest energi?" },
+    { title: "Handling", text: "Vad är en liten sak som ger dig mer energi?" },
+    { title: "Tankemönster", text: "Vad säger du till dig själv när du är trött?" }
   ],
 
   självkänsla: [
     { title: "Reflektion", text: "När tvivlar du mest på dig själv?" },
-    { title: "Handling", text: "Skriv ner en sak du gjorde bra idag." },
+    { title: "Handling", text: "Skriv ner en sak du gjorde bra nyligen." },
     { title: "Tankemönster", text: "Hur skulle du prata med en vän i samma situation?" }
   ],
 
   ekonomi: [
-    { title: "Reflektion", text: "Vad i din ekonomi skapar mest oro just nu?" },
-    { title: "Handling", text: "Vilken liten ekonomisk förbättring kan du göra denna vecka?" },
-    { title: "Tankemönster", text: "Vilken tanke kring pengar begränsar dig?" }
+    { title: "Reflektion", text: "Vad i din ekonomi skapar mest oro?" },
+    { title: "Handling", text: "Vilken liten ekonomisk handling kan du ta idag?" },
+    { title: "Tankemönster", text: "Vilken tanke begränsar din ekonomiska utveckling?" }
   ],
 
   utveckling: [
     { title: "Reflektion", text: "Vad vill du egentligen växa inom just nu?" },
-    { title: "Handling", text: "Vilket litet steg kan du ta denna vecka?" },
-    { title: "Tankemönster", text: "Vad håller dig tillbaka – rädsla eller vana?" }
+    { title: "Handling", text: "Vilket litet steg kan du ta idag?" },
+    { title: "Tankemönster", text: "Vad håller dig tillbaka mentalt?" }
   ]
 };
 
-// ===== FUNKTIONER =====
+// ===== VISA KORT =====
+function showCard() {
+  if (!currentCategory) return;
+
+  const list = exercises[currentCategory];
+  const current = list[currentIndex];
+
+  titleEl.innerText = current.title;
+  textEl.innerText = current.text;
+  progressEl.innerText = `${currentIndex + 1} / ${list.length}`;
+
+  // 🔥 reset varje gång
+  inputEl.value = "";
+  aiResponse.innerText = "";
+  aiResponse.classList.add("hidden");
+}
+
+// ===== VÄLJ KATEGORI =====
+function selectCategory(cat) {
+  currentCategory = cat;
+  currentIndex = 0;
+  showCard();
+}
+
+// ===== NÄSTA ÖVNING =====
+function nextExercise() {
+  if (!currentCategory) return;
+
+  const list = exercises[currentCategory];
+
+  currentIndex++;
+
+  if (currentIndex >= list.length) {
+    currentIndex = list.length - 1;
+  }
+
+  showCard();
+}
+
+// ===== AI CALL =====
 window.send = async function () {
   const message = inputEl.value;
 
@@ -69,35 +109,19 @@ window.send = async function () {
       body: JSON.stringify({
         message,
         category: currentCategory,
-        language: currentLanguage || "sv"
+        language: currentLanguage
       })
     });
 
     const data = await res.json();
 
-    aiResponse.innerText = data.reply;
+    aiResponse.innerText = data.reply || "Inget svar.";
 
     // 🔥 rensa input efter svar
     inputEl.value = "";
 
   } catch (err) {
+    console.error(err);
     aiResponse.innerText = "Något gick fel.";
   }
 };
-function nextExercise() {
-  currentIndex++;
-
-  // stoppa vid max (3 frågor)
-  if (currentIndex > 2) currentIndex = 2;
-
-  const current = exercises[currentCategory][currentIndex];
-
-  titleEl.innerText = current.title;
-  textEl.innerText = current.text;
-  progressEl.innerText = `${currentIndex + 1} / 3`;
-
-  // 🔥 Rensa allt
-  inputEl.value = "";
-  aiResponse.innerText = "";
-  aiResponse.classList.add("hidden");
-}

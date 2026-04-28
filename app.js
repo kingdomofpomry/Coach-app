@@ -11,7 +11,7 @@ const aiResponse = document.getElementById("ai-response");
 // ===== STATE =====
 let currentCategory = null;
 let currentIndex = 0;
-let currentLanguage = "sv";
+let currentLanguage = "en";
 
 // ===== LANGUAGE SWITCH =====
 function setLanguage(lang) {
@@ -179,3 +179,4 @@ window.send = async function () {
       : "Something went wrong.";
   }
 };
+setLanguage(currentLanguage);

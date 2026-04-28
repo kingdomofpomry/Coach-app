@@ -19,9 +19,25 @@ function setLanguage(lang) {
   localStorage.setItem("lang", lang);
 
   updateCategoryButtons();
-
+  updateUIText();
+  
   if (currentCategory) {
     showCard();
+  }
+}
+function updateUIText() {
+  const input = document.getElementById("input");
+  const sendBtn = document.querySelector('button[onclick="send()"]');
+  const nextBtn = document.querySelector('button[onclick="nextExercise()"]');
+
+  if (currentLanguage === "sv") {
+    input.placeholder = "Skriv din reflektion...";
+    sendBtn.innerText = "Få AI-reflektion";
+    nextBtn.innerText = "Nästa övning";
+  } else {
+    input.placeholder = "Write your reflection...";
+    sendBtn.innerText = "Get AI insight";
+    nextBtn.innerText = "Next exercise";
   }
 }
 
@@ -201,4 +217,18 @@ window.send = async function () {
   }
 };
 updateCategoryButtons();
+setLanguage(currentLanguage);
+function enableReminders() {
+  alert(currentLanguage === "sv"
+    ? "Påminnelser aktiverade (demo)"
+    : "Reminders activated (demo)");
+}
+
+function scheduleDaily() {
+  alert(currentLanguage === "sv"
+    ? "Daglig påminnelse inställd (demo)"
+    : "Daily reminder set (demo)");
+}
+updateCategoryButtons();
+updateUIText();
 setLanguage(currentLanguage);

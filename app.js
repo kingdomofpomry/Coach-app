@@ -20,6 +20,7 @@ function setLanguage(lang) {
 
   updateCategoryButtons();
   updateStreakUI();
+  updateLastAnswerUI();
   
   if (currentCategory) {
     showCard();
@@ -185,6 +186,7 @@ function nextExercise() {
 window.send = async function () {
   const message = inputEl.value;
 saveAnswer(message);
+  updateLastAnswerUI();
   updateStreakUI();
   
   if (!message) return;
@@ -315,5 +317,22 @@ function updateStreakUI() {
   el.innerText = currentLanguage === "sv"
     ? `🔥 Streak: ${streak} dagar`
     : `🔥 Streak: ${streak} days`;
+}
+function updateLastAnswerUI() {
+  const el = document.getElementById("last-answer");
+  if (!el) return;
+
+  const last = getLastAnswer();
+
+  if (!last) {
+    el.classList.add("hidden");
+    return;
+  }
+
+  el.classList.remove("hidden");
+
+  el.innerText = currentLanguage === "sv"
+    ? `🧠 Senaste reflektion:\n${last}`
+    : `🧠 Last reflection:\n${last}`;
 }
 

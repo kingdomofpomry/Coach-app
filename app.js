@@ -188,6 +188,15 @@ window.send = async function () {
 saveAnswer(message);
   updateLastAnswerUI();
   updateStreakUI();
+  const streak = getStreak();
+
+if (streak > 1) {
+  aiResponse.innerText = currentLanguage === "sv"
+    ? `🔥 Du är på ${streak} dagar i rad! Fortsätt så!`
+    : `🔥 You're on a ${streak} day streak! Keep going!`;
+
+  aiResponse.classList.remove("hidden");
+}
   
   if (!message) return;
 
@@ -314,9 +323,16 @@ function updateStreakUI() {
 
   const streak = getStreak();
 
+  if (streak === 0) {
+    el.innerText = currentLanguage === "sv"
+      ? "Starta din streak idag 💡"
+      : "Start your streak today 💡";
+    return;
+  }
+
   el.innerText = currentLanguage === "sv"
-    ? `🔥 Streak: ${streak} dagar`
-    : `🔥 Streak: ${streak} days`;
+    ? `🔥 ${streak} dagar i rad`
+    : `🔥 ${streak} day streak`;
 }
 function updateLastAnswerUI() {
   const el = document.getElementById("last-answer");

@@ -19,7 +19,7 @@ function setLanguage(lang) {
   localStorage.setItem("lang", lang);
 
   updateCategoryButtons();
-  updateUIText();
+  updateStreakUI();
   
   if (currentCategory) {
     showCard();
@@ -185,6 +185,7 @@ function nextExercise() {
 window.send = async function () {
   const message = inputEl.value;
 saveAnswer(message);
+  updateStreakUI();
   
   if (!message) return;
 

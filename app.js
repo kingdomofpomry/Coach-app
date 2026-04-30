@@ -305,3 +305,14 @@ function getStreak() {
 }
 console.log("Last answer:", getLastAnswer());
 console.log("Streak:", getStreak());
+function updateStreakUI() {
+  const el = document.getElementById("streak");
+  if (!el) return;
+
+  const streak = getStreak();
+
+  el.innerText = currentLanguage === "sv"
+    ? `🔥 Streak: ${streak} dagar`
+    : `🔥 Streak: ${streak} days`;
+}
+

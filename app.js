@@ -62,83 +62,41 @@ function updateCategoryButtons() {
 
 // ===== DATA =====
 const exercises = {
-  stress: {
-    sv: [
-      { title: "Reflektion", text: "Vad är den största källan till stress i ditt liv just nu?" },
-      { title: "Handling", text: "Skriv ner EN sak du kan göra idag för att minska stress." },
-      { title: "Tankemönster", text: "Vilken tanke gör stressen värre – och hur kan du tänka annorlunda?" }
-    ],
-    en: [
-      { title: "Reflection", text: "What is the biggest source of stress in your life right now?" },
-      { title: "Action", text: "Write down ONE thing you can do today to reduce stress." },
-      { title: "Mindset", text: "Which thought makes your stress worse – and how can you reframe it?" }
-    ]
-  },
+  bills: {
+  sv: [
+    { title: "Räkningar", text: "Har du abonnemang du inte använder?" }
+  ],
+  en: [
+    { title: "Bills", text: "Do you have subscriptions you don’t use?" }
+  ]
+},
 
-  relation: {
-    sv: [
-      { title: "Reflektion", text: "Vilken relation påverkar dig mest just nu?" },
-      { title: "Handling", text: "Finns det ett samtal du behöver ta?" },
-      { title: "Tankemönster", text: "Vilken roll tar du i relationer?" }
-    ],
-    en: [
-      { title: "Reflection", text: "Which relationship affects you the most right now?" },
-      { title: "Action", text: "Is there a conversation you need to have?" },
-      { title: "Mindset", text: "What role do you take in relationships?" }
-    ]
-  },
+spending: {
+  sv: [
+    { title: "Utgifter", text: "Vad spenderade du pengar på idag?" }
+  ],
+  en: [
+    { title: "Spending", text: "What did you spend money on today?" }
+  ]
+},
 
-  energi: {
-    sv: [
-      { title: "Reflektion", text: "När på dagen känner du mest energi?" },
-      { title: "Handling", text: "Vad är en liten sak som ger dig mer energi?" },
-      { title: "Tankemönster", text: "Vad säger du till dig själv när du är trött?" }
-    ],
-    en: [
-      { title: "Reflection", text: "When during the day do you feel the most energy?" },
-      { title: "Action", text: "What is one small thing that gives you more energy?" },
-      { title: "Mindset", text: "What do you tell yourself when you're tired?" }
-    ]
-  },
+saving: {
+  sv: [
+    { title: "Spara", text: "Vad kunde du ha sparat idag?" }
+  ],
+  en: [
+    { title: "Saving", text: "What could you have saved today?" }
+  ]
+},
 
-  självkänsla: {
-    sv: [
-      { title: "Reflektion", text: "När tvivlar du mest på dig själv?" },
-      { title: "Handling", text: "Skriv ner en sak du gjorde bra nyligen." },
-      { title: "Tankemönster", text: "Hur skulle du prata med en vän i samma situation?" }
-    ],
-    en: [
-      { title: "Reflection", text: "When do you doubt yourself the most?" },
-      { title: "Action", text: "Write down one thing you did well recently." },
-      { title: "Mindset", text: "How would you speak to a friend in your situation?" }
-    ]
-  },
-
-  ekonomi: {
-    sv: [
-      { title: "Reflektion", text: "Vad i din ekonomi skapar mest oro?" },
-      { title: "Handling", text: "Vilken liten ekonomisk handling kan du ta idag?" },
-      { title: "Tankemönster", text: "Vilken tanke begränsar din ekonomiska utveckling?" }
-    ],
-    en: [
-      { title: "Reflection", text: "What in your finances creates the most stress?" },
-      { title: "Action", text: "What small financial action can you take today?" },
-      { title: "Mindset", text: "What thought limits your financial growth?" }
-    ]
-  },
-
-  utveckling: {
-    sv: [
-      { title: "Reflektion", text: "Vad vill du egentligen växa inom just nu?" },
-      { title: "Handling", text: "Vilket litet steg kan du ta idag?" },
-      { title: "Tankemönster", text: "Vad håller dig tillbaka mentalt?" }
-    ],
-    en: [
-      { title: "Reflection", text: "What do you really want to grow in right now?" },
-      { title: "Action", text: "What small step can you take today?" },
-      { title: "Mindset", text: "What is holding you back mentally?" }
-    ]
-  }
+mind: {
+  sv: [
+    { title: "Beslut", text: "Tog du ett smart ekonomiskt beslut idag?" }
+  ],
+  en: [
+    { title: "Decisions", text: "Did you make a smart financial decision today?" }
+  ]
+}
 };
 
 // ===== SHOW CARD =====

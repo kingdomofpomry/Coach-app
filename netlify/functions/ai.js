@@ -12,6 +12,23 @@ exports.handler = async function (event) {
     const message = body.message;
     const category = body.category || "general";
     const language = body.language || "sv";
+    let context = "";
+
+if (category === "spending") {
+  context = "Focus on reducing unnecessary spending.";
+}
+
+if (category === "bills") {
+  context = "Focus on cutting subscriptions and recurring costs.";
+}
+
+if (category === "saving") {
+  context = "Focus on saving strategies and budgeting.";
+}
+
+if (category === "mind") {
+  context = "Focus on decision making around money.";
+}
 
     if (!message) {
       return {

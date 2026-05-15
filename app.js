@@ -15,16 +15,19 @@ let currentLanguage = localStorage.getItem("lang") || "en";
 
 // ===== LANGUAGE SWITCH =====
 function setLanguage(lang) {
+
   currentLanguage = lang;
+
   localStorage.setItem("lang", lang);
 
   updateCategoryButtons();
-  updateStreakUI();
-  updateLastAnswerUI();
-  
+
+  updateUIText();
+
   if (currentCategory) {
     showCard();
   }
+
 }
 function updateUIText() {
   const input = document.getElementById("input");
@@ -43,21 +46,25 @@ function updateUIText() {
 }
 
 function updateCategoryButtons() {
+
   if (currentLanguage === "sv") {
-    document.getElementById("cat-stress").innerText = "😔 Stress";
-    document.getElementById("cat-relation").innerText = "❤️ Relation";
-    document.getElementById("cat-energi").innerText = "⚡ Energi";
-    document.getElementById("cat-sjalv").innerText = "🌱 Självkänsla";
-    document.getElementById("cat-ekonomi").innerText = "💰 Ekonomi";
-    document.getElementById("cat-utveckling").innerText = "🚀 Personlig utveckling";
+
+    document.getElementById("cat-finance").innerText = "💰 Ekonomi";
+    document.getElementById("cat-bills").innerText = "📄 Räkningar";
+    document.getElementById("cat-spending").innerText = "💳 Utgifter";
+    document.getElementById("cat-save").innerText = "📈 Sparande";
+    document.getElementById("cat-decisions").innerText = "🧠 Beslut";
+
   } else {
-    document.getElementById("cat-stress").innerText = "😔 Stress";
-    document.getElementById("cat-relation").innerText = "❤️ Relationship";
-    document.getElementById("cat-energi").innerText = "⚡ Energy";
-    document.getElementById("cat-sjalv").innerText = "🌱 Self-esteem";
-    document.getElementById("cat-ekonomi").innerText = "💰 Finance";
-    document.getElementById("cat-utveckling").innerText = "🚀 Personal growth";
+
+    document.getElementById("cat-finance").innerText = "💰 Finance";
+    document.getElementById("cat-bills").innerText = "📄 Bills";
+    document.getElementById("cat-spending").innerText = "💳 Spending";
+    document.getElementById("cat-save").innerText = "📈 Save";
+    document.getElementById("cat-decisions").innerText = "🧠 Decisions";
+
   }
+
 }
 
 // ===== DATA =====

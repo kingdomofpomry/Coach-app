@@ -8,10 +8,24 @@ exports.handler = async function (event) {
 
   try {
     const body = JSON.parse(event.body || "{}");
-
     const message = body.message;
     const category = body.category || "general";
     const language = body.language || "sv";
+   
+    const systemPrompt = `
+You are a strict financial coach.
+
+Your job:
+- identify bad spending habits
+- suggest how to save money
+- give short, clear advice
+- no motivation fluff
+
+Rules:
+- always focus on money
+- be direct
+- give 1 actionable improvement
+`;
     let context = "";
 
 if (category === "spending") {
@@ -23,12 +37,13 @@ if (category === "bills") {
 }
 
 if (category === "saving") {
-  context = "Focus on saving strategies and budgeting.";
+  context = "Focus on saving strategies.";
 }
 
 if (category === "mind") {
-  context = "Focus on decision making around money.";
+  context = "Focus on financial decision making.";
 }
+     
 
     if (!message) {
       return {

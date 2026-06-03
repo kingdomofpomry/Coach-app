@@ -46,14 +46,17 @@ function updateUIText() {
 }
 
 function updateCategoryButtons() {
-
+  
+const performance = document.getElementById("cat-performance");
+  
   if (currentLanguage === "sv") {
 
     document.getElementById("cat-finance").innerText = "💰 Ekonomi";
     document.getElementById("cat-bills").innerText = "📄 Räkningar";
     document.getElementById("cat-spending").innerText = "💳 Utgifter";
     document.getElementById("cat-save").innerText = "📈 Sparande";
-    document.getElementById("cat-decisions").innerText = "🧠 Beslut";
+    document.getElementById("cat-decisions").innerText = "🎯 Beslut";
+    performance.innerText = "🧠 Performance";
 
   } else {
 
@@ -61,7 +64,8 @@ function updateCategoryButtons() {
     document.getElementById("cat-bills").innerText = "📄 Bills";
     document.getElementById("cat-spending").innerText = "💳 Spending";
     document.getElementById("cat-save").innerText = "📈 Save";
-    document.getElementById("cat-decisions").innerText = "🧠 Decisions";
+    document.getElementById("cat-decisions").innerText = "🎯 Decisions";
+    performance.innerText = "🧠 Performance";
 
   }
 
@@ -95,7 +99,33 @@ saving: {
     { title: "Saving", text: "What could you have saved today?" }
   ]
 },
+  
+performance: {
 
+  sv: [
+    {
+      title: "Fokus",
+      text: "Vad tog mest energi från dig idag?"
+    },
+    {
+      title: "Mental klarhet",
+      text: "När tänkte du som klarast idag?"
+    }
+  ],
+
+  en: [
+    {
+      title: "Focus",
+      text: "What drained the most energy from you today?"
+    },
+    {
+      title: "Mental clarity",
+      text: "When did you think most clearly today?"
+    }
+  ]
+
+},
+  
 mind: {
   sv: [
     { title: "Beslut", text: "Tog du ett smart ekonomiskt beslut idag?" }

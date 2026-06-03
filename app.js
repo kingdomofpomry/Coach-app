@@ -56,7 +56,7 @@ const performance = document.getElementById("cat-performance");
     document.getElementById("cat-spending").innerText = "💳 Utgifter";
     document.getElementById("cat-save").innerText = "📈 Sparande";
     document.getElementById("cat-decisions").innerText = "🎯 Beslut";
-    performance.innerText = "🧠 Performance";
+    performance.innerText = "🧠 Prestation";
 
   } else {
 
